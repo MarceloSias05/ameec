@@ -1,0 +1,42 @@
+---
+import Layout from '@layouts/Layout.astro';
+import Header from '@components/Header.astro';
+import Footer from '@components/Footer.astro';
+---
+
+<Layout
+  title="Olas de Amor — AMEEC"
+  description="Proyecto de educación ambiental con infancia en comunidades costeras de México."
+>
+  <Header />
+  <main id="main">
+    <section class="container-narrow py-20 md:py-28">
+      <p class="eyebrow mb-4">Proyecto</p>
+      <h1 class="font-display text-5xl md:text-6xl font-bold text-verde-500 leading-tight mb-6">
+        Olas de Amor
+      </h1>
+      <p class="text-xl text-carbon/75 leading-relaxed max-w-2xl mb-10">
+        Educación ambiental con infancia en comunidades costeras. Combinamos juego, naturaleza y cuidado comunitario para sembrar el vínculo con el entorno desde la primera infancia.
+      </p>
+      <div class="flex gap-4 flex-wrap">
+        <a href="/#inscribete" class="btn-primary">Participar en este proyecto</a>
+        <a href="/" class="btn-secondary">Ver todos los proyectos</a>
+      </div>
+    </section>
+
+    <section class="bg-white py-16">
+      <div class="container-narrow max-w-3xl">
+        <div class="rounded-3xl border-2 border-dashed border-ocre-400/40 bg-ocre-50 p-10 text-center">
+          <p class="font-display text-2xl font-semibold text-carbon mb-3">Página en construcción</p>
+          <p class="text-carbon/65 leading-relaxed">
+            Estamos migrando el contenido de este proyecto desde el sitio anterior.
+            Mientras tanto, escríbenos a
+            <a href="mailto:hola@ameec.org" class="text-verde-500 underline underline-offset-2">hola@ameec.org</a>
+            para conocer más.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

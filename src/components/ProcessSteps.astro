@@ -15,8 +15,12 @@ const steps = stepsData.items;
 
     <ol class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
       {
-        steps.map((step) => (
-          <li class="rounded-2xl border-t-4 border-ocre-400 bg-crema p-7 transition-shadow hover:shadow-md">
+        steps.map((step, i) => (
+          <li
+            data-reveal
+            data-reveal-delay={String(i * 100)}
+            class="rounded-2xl border-t-4 border-ocre-400 bg-crema p-7 transition-shadow hover:shadow-md"
+          >
             <span class="font-display text-5xl font-bold text-ocre-400">{step.num}</span>
             <h3 class="mb-2 mt-4 font-display text-xl font-semibold text-verde-500">
               {step.title}

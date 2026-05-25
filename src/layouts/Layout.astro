@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import Chatbot from '@components/Chatbot.astro';
+import ScrollReveal from '@components/ScrollReveal.astro';
 
 interface Props {
   title?: string;
@@ -43,6 +44,10 @@ const imageUrl = new URL(image, Astro.site).href;
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={imageUrl} />
 
+    {import.meta.env.PROD && (
+      <script defer data-domain="induccion.ameec.org" src="https://plausible.io/js/script.js" />
+    )}
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -60,5 +65,6 @@ const imageUrl = new URL(image, Astro.site).href;
 
     <slot />
     <Chatbot />
+    <ScrollReveal />
   </body>
 </html>

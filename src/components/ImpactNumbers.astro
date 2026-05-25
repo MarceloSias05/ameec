@@ -19,8 +19,12 @@ const metrics = impactData.items;
 
       <dl class="grid gap-4 sm:grid-cols-3">
         {
-          metrics.map((metric) => (
-            <div class="rounded-3xl border border-white/15 bg-white/10 p-6 backdrop-blur">
+          metrics.map((metric, i) => (
+            <div
+              data-reveal
+              data-reveal-delay={String(i * 100)}
+              class="rounded-3xl border border-white/15 bg-white/10 p-6 backdrop-blur"
+            >
               <dt class="text-sm font-medium uppercase tracking-wider text-white/65">
                 {metric.label}
               </dt>

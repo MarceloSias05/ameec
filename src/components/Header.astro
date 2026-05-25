@@ -7,7 +7,11 @@ const nav = [
 ];
 ---
 
-<header class="container-narrow relative z-40 flex items-center justify-between py-5">
+<header
+  id="site-header"
+  class="sticky top-0 z-40 w-full transition-all duration-300"
+>
+<div class="container-narrow relative flex items-center justify-between py-5">
   <a href="/" class="font-display text-2xl font-bold text-verde-500" aria-label="AMEEC — Inicio">
     AMEEC<span class="text-ocre-400">.</span>
   </a>
@@ -72,9 +76,24 @@ const nav = [
       </a>
     </nav>
   </div>
+</div>
 </header>
 
 <script>
+  // Sticky header: añade fondo blur al hacer scroll
+  const header = document.getElementById('site-header');
+  if (header) {
+    const onScroll = () => {
+      if (window.scrollY > 20) {
+        header.classList.add('bg-crema/90', 'backdrop-blur-md', 'shadow-sm', 'border-b', 'border-carbon/5');
+      } else {
+        header.classList.remove('bg-crema/90', 'backdrop-blur-md', 'shadow-sm', 'border-b', 'border-carbon/5');
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
+
   const menuButton = document.querySelector('[data-menu-toggle]');
   const mobileMenu = document.querySelector('[data-mobile-menu]');
 

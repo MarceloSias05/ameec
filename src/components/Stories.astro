@@ -15,8 +15,12 @@ const testimonials = storiesData.items;
 
     <div class="grid gap-6 md:grid-cols-3">
       {
-        testimonials.map((testimonial) => (
-          <blockquote class="rounded-2xl border border-carbon/5 bg-white p-7 shadow-sm transition-shadow hover:shadow-md">
+        testimonials.map((testimonial, i) => (
+          <blockquote
+            data-reveal
+            data-reveal-delay={String(i * 120)}
+            class="rounded-2xl border border-carbon/5 bg-white p-7 shadow-sm transition-shadow hover:shadow-md"
+          >
             <p class="mb-5 font-display text-lg leading-snug text-carbon">"{testimonial.quote}"</p>
             <footer class="text-sm font-medium text-verde-500">
               {testimonial.author} · {testimonial.location} · {testimonial.role}
