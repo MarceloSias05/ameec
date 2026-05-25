@@ -1,0 +1,23 @@
+---
+import Layout from '@layouts/Layout.astro';
+import Header from '@components/Header.astro';
+import Footer from '@components/Footer.astro';
+---
+
+<Layout
+  title="Página no encontrada · AMEEC"
+  description="La página que buscas no existe."
+>
+  <Header />
+  <main id="main" class="container-narrow py-32 text-center min-h-[60vh] flex flex-col items-center justify-center">
+    <p class="eyebrow mb-4">Error 404</p>
+    <h1 class="font-display text-5xl font-bold text-verde-500 mb-6">
+      Esta página se perdió en el monte.
+    </h1>
+    <p class="text-lg text-carbon/70 mb-10 max-w-md">
+      No encontramos lo que buscas, pero el camino de regreso está justo aquí.
+    </p>
+    <a href="/" class="btn-primary">Volver al inicio</a>
+  </main>
+  <Footer />
+</Layout>

@@ -1,0 +1,78 @@
+---
+const formspreeId = import.meta.env.PUBLIC_FORMSPREE_ID || 'YOUR_FORM_ID';
+const formAction = `https://formspree.io/f/${formspreeId}`;
+const nextUrl = new URL('/gracias', Astro.site ?? Astro.url.origin).href;
+---
+
+<section id="inscribete" class="bg-verde-500 py-20 text-white md:py-28">
+  <div class="container-narrow mx-auto max-w-3xl text-center">
+    <h2 class="mb-6 font-display text-4xl font-bold leading-tight md:text-5xl">
+      ¿Listas, listos para empezar?
+    </h2>
+    <p class="mb-10 text-lg leading-relaxed opacity-90">
+      La próxima sesión de bienvenida es el primer sábado de cada mes. Tomar este paso te compromete
+      a una hora de tu tiempo, nada más.
+    </p>
+
+    <form
+      action={formAction}
+      method="POST"
+      class="space-y-5 rounded-2xl bg-white p-8 text-left text-carbon shadow-2xl"
+    >
+      <input type="hidden" name="_subject" value="Nueva inscripción a inducción AMEEC" />
+      <input type="hidden" name="_next" value={nextUrl} />
+      <input type="hidden" name="_language" value="es" />
+
+      {
+        formspreeId === 'YOUR_FORM_ID' && (
+          <p class="rounded-xl border border-ocre-400/30 bg-ocre-50 px-4 py-3 text-sm text-ocre-700">
+            Pendiente: configurar <code>PUBLIC_FORMSPREE_ID</code> con el ID real de Formspree antes
+            de publicar.
+          </p>
+        )
+      }
+
+      <div>
+        <label for="nombre" class="mb-2 block text-sm font-medium">Tu nombre</label>
+        <input
+          id="nombre"
+          type="text"
+          name="nombre"
+          required
+          class="w-full rounded-lg border border-carbon/20 px-4 py-3 focus:border-ocre-400 focus:ring-0"
+          placeholder="María García"
+        />
+      </div>
+
+      <div>
+        <label for="email" class="mb-2 block text-sm font-medium">Correo electrónico</label>
+        <input
+          id="email"
+          type="email"
+          name="email"
+          required
+          class="w-full rounded-lg border border-carbon/20 px-4 py-3 focus:border-ocre-400 focus:ring-0"
+          placeholder="maria@correo.mx"
+        />
+      </div>
+
+      <div>
+        <label for="mensaje" class="mb-2 block text-sm font-medium">¿Qué te trae a AMEEC?</label>
+        <textarea
+          id="mensaje"
+          name="mensaje"
+          rows="3"
+          required
+          class="w-full rounded-lg border border-carbon/20 px-4 py-3 focus:border-ocre-400 focus:ring-0"
+          placeholder="Cuéntanos brevemente..."></textarea>
+      </div>
+
+      <button
+        type="submit"
+        class="w-full rounded-full bg-ocre-400 py-3.5 font-medium text-white transition-colors hover:bg-ocre-500"
+      >
+        Reservar mi lugar
+      </button>
+    </form>
+  </div>
+</section>

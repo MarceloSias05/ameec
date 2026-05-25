@@ -1,0 +1,24 @@
+{
+  "items": [
+    {
+      "pregunta": "¿Necesito experiencia previa en ecología o construcción?",
+      "respuesta": "No. AMEEC está pensada para personas de todos los niveles. Lo que sí pedimos es disposición para aprender y colaborar."
+    },
+    {
+      "pregunta": "¿Cuánto tiempo requiere el proceso de inducción?",
+      "respuesta": "La etapa inicial son aproximadamente 4 semanas con una dedicación de 2 a 4 horas por semana. Después, tú defines tu nivel de compromiso según el proyecto al que te sumes."
+    },
+    {
+      "pregunta": "¿El proceso es presencial o en línea?",
+      "respuesta": "La bienvenida y las primeras sesiones son virtuales. Los talleres de bioconstrucción incluyen actividades presenciales en distintos estados de México."
+    },
+    {
+      "pregunta": "¿Tiene algún costo participar?",
+      "respuesta": "La inducción es gratuita. Algunos talleres especializados tienen cuota de recuperación simbólica para cubrir materiales. Nadie queda fuera por falta de recursos — consulta con nosotros."
+    },
+    {
+      "pregunta": "¿Puedo participar si estoy fuera de México?",
+      "respuesta": "Sí. La parte formativa virtual es accesible desde cualquier lugar. Para actividades presenciales dependemos de la logística, pero muchas personas de la diáspora participan a distancia."
+    }
+  ]
+}

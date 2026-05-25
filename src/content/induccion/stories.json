@@ -1,0 +1,22 @@
+{
+  "items": [
+    {
+      "quote": "Aprendí a construir con tierra y a escuchar mejor a mi comunidad. Las dos cosas eran urgentes.",
+      "author": "Luis",
+      "location": "Tlaxcala",
+      "role": "Voluntario 2024"
+    },
+    {
+      "quote": "Pasé de asistir a talleres a coordinar uno. AMEEC abre camino al que llega con ganas.",
+      "author": "Daniela",
+      "location": "CDMX",
+      "role": "Coordinadora"
+    },
+    {
+      "quote": "Encontré un lenguaje común para hablar de ecología y de comunidad sin tecnicismos huecos.",
+      "author": "Ernesto",
+      "location": "Oaxaca",
+      "role": "Facilitador"
+    }
+  ]
+}

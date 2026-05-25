@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-verde: #3F5E3F;
+    --color-ocre: #C97B4A;
+    --color-crema: #F4EFE6;
+    --color-carbon: #1F2922;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-crema text-carbon font-sans;
+  }
+
+  ::selection {
+    @apply bg-ocre-400 text-white;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-display tracking-tight;
+  }
+
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible {
+    @apply outline-2 outline-offset-2 outline-ocre-400;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center bg-verde-500 text-white px-7 py-3.5 rounded-full font-medium text-base hover:bg-ocre-400 transition-colors duration-200;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center border-2 border-verde-500 text-verde-500 px-7 py-3.5 rounded-full font-medium text-base hover:bg-verde-500 hover:text-white transition-colors duration-200;
+  }
+
+  .eyebrow {
+    @apply text-ocre-400 font-medium tracking-wider uppercase text-xs md:text-sm;
+  }
+
+  .container-narrow {
+    @apply max-w-6xl mx-auto px-6;
+  }
+}

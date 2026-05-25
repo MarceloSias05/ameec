@@ -1,0 +1,27 @@
+---
+import Layout from '@layouts/Layout.astro';
+import Header from '@components/Header.astro';
+import Hero from '@components/Hero.astro';
+import ProcessSteps from '@components/ProcessSteps.astro';
+import ImpactNumbers from '@components/ImpactNumbers.astro';
+import Stories from '@components/Stories.astro';
+import FormularioInscripcion from '@components/FormularioInscripcion.astro';
+import FAQ from '@components/FAQ.astro';
+import Footer from '@components/Footer.astro';
+---
+
+<Layout
+  title="Inducción AMEEC — Empieza tu camino con nosotros"
+  description="Conoce el proceso de inducción de la Asociación Mexicana de Educación Ecológica y Comunitaria. Aprende, construye y siembra con la tierra."
+>
+  <Header />
+  <main id="main">
+    <Hero />
+    <ProcessSteps />
+    <ImpactNumbers />
+    <Stories />
+    <FAQ />
+    <FormularioInscripcion />
+  </main>
+  <Footer />
+</Layout>

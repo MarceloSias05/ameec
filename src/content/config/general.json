@@ -1,0 +1,16 @@
+{
+  "site_name": "AMEEC",
+  "contact_email": "hola@ameec.org",
+  "location": "Ciudad de México",
+  "hero": {
+    "eyebrow": "Bienvenida · Inducción AMEEC",
+    "title": "Aprende, construye y siembra",
+    "title_accent": "con la tierra",
+    "body": "AMEEC reúne a personas que creen que la educación ecológica y la bioconstrucción comunitaria son herramientas reales de transformación. Esta es tu puerta de entrada.",
+    "primary_cta": "Quiero participar",
+    "secondary_cta": "Conocer el proceso",
+    "image_alt": "Ilustración de un taller comunitario de bioconstrucción con herramientas, plantas y tierra",
+    "quote": "Llegué buscando un curso. Encontré una comunidad.",
+    "quote_author": "María, voluntaria desde 2023"
+  }
+}

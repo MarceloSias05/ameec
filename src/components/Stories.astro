@@ -1,0 +1,29 @@
+---
+import storiesData from '../content/induccion/stories.json';
+
+const testimonials = storiesData.items;
+---
+
+<section id="historias" class="py-20 md:py-28">
+  <div class="container-narrow">
+    <div class="mb-16 max-w-2xl">
+      <p class="eyebrow mb-3">Historias</p>
+      <h2 class="font-display text-4xl font-bold leading-tight text-verde-500 md:text-5xl">
+        Lo que cuentan quienes ya están dentro
+      </h2>
+    </div>
+
+    <div class="grid gap-6 md:grid-cols-3">
+      {
+        testimonials.map((testimonial) => (
+          <blockquote class="rounded-2xl border border-carbon/5 bg-white p-7 shadow-sm transition-shadow hover:shadow-md">
+            <p class="mb-5 font-display text-lg leading-snug text-carbon">"{testimonial.quote}"</p>
+            <footer class="text-sm font-medium text-verde-500">
+              {testimonial.author} · {testimonial.location} · {testimonial.role}
+            </footer>
+          </blockquote>
+        ))
+      }
+    </div>
+  </div>
+</section>

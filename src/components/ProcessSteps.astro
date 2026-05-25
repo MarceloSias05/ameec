@@ -1,0 +1,30 @@
+---
+import stepsData from '../content/induccion/process-steps.json';
+
+const steps = stepsData.items;
+---
+
+<section id="proceso" class="bg-white py-20 md:py-28">
+  <div class="container-narrow">
+    <div class="mb-16 max-w-2xl">
+      <p class="eyebrow mb-3">El proceso</p>
+      <h2 class="font-display text-4xl font-bold leading-tight text-verde-500 md:text-5xl">
+        Cuatro pasos para empezar
+      </h2>
+    </div>
+
+    <ol class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+      {
+        steps.map((step) => (
+          <li class="rounded-2xl border-t-4 border-ocre-400 bg-crema p-7 transition-shadow hover:shadow-md">
+            <span class="font-display text-5xl font-bold text-ocre-400">{step.num}</span>
+            <h3 class="mb-2 mt-4 font-display text-xl font-semibold text-verde-500">
+              {step.title}
+            </h3>
+            <p class="text-sm leading-relaxed text-carbon/75">{step.desc}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>

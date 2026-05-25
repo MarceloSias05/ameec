@@ -1,0 +1,24 @@
+{
+  "items": [
+    {
+      "num": "01",
+      "title": "Conoce",
+      "desc": "Una sesión introductoria virtual donde compartimos misión, proyectos y formas reales de participar."
+    },
+    {
+      "num": "02",
+      "title": "Vincúlate",
+      "desc": "Te asignamos una persona mentora que te acompaña en tus primeras semanas."
+    },
+    {
+      "num": "03",
+      "title": "Fórmate",
+      "desc": "Accedes a talleres de bioconstrucción, agroecología y facilitación comunitaria."
+    },
+    {
+      "num": "04",
+      "title": "Contribuye",
+      "desc": "Te sumas a un proyecto activo donde tu trabajo tiene impacto medible."
+    }
+  ]
+}

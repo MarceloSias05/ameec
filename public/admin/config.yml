@@ -1,0 +1,89 @@
+backend:
+  name: git-gateway
+  branch: main
+
+local_backend: true
+media_folder: public/uploads
+public_folder: /uploads
+locale: es
+
+collections:
+  - name: config_general
+    label: Configuración general
+    files:
+      - name: general
+        label: General
+        file: src/content/config/general.json
+        format: json
+        fields:
+          - { label: Nombre del sitio, name: site_name, widget: string }
+          - { label: Correo de contacto, name: contact_email, widget: string }
+          - { label: Ubicación, name: location, widget: string }
+          - label: Hero
+            name: hero
+            widget: object
+            fields:
+              - { label: Ceja, name: eyebrow, widget: string }
+              - { label: Título, name: title, widget: string }
+              - { label: Título destacado, name: title_accent, widget: string }
+              - { label: Texto, name: body, widget: text }
+              - { label: CTA principal, name: primary_cta, widget: string }
+              - { label: CTA secundario, name: secondary_cta, widget: string }
+              - { label: Alt de imagen, name: image_alt, widget: string }
+              - { label: Cita, name: quote, widget: string }
+              - { label: Autor de cita, name: quote_author, widget: string }
+
+  - name: induccion
+    label: Inducción
+    files:
+      - name: pasos
+        label: Pasos del proceso
+        file: src/content/induccion/process-steps.json
+        format: json
+        fields:
+          - label: Pasos
+            name: items
+            widget: list
+            fields:
+              - { label: Número, name: num, widget: string }
+              - { label: Título, name: title, widget: string }
+              - { label: Descripción, name: desc, widget: text }
+
+      - name: testimonios
+        label: Testimonios
+        file: src/content/induccion/stories.json
+        format: json
+        fields:
+          - label: Testimonios
+            name: items
+            widget: list
+            fields:
+              - { label: Cita, name: quote, widget: text }
+              - { label: Nombre, name: author, widget: string }
+              - { label: Ubicación, name: location, widget: string }
+              - { label: Rol, name: role, widget: string }
+
+      - name: faq
+        label: Preguntas frecuentes
+        file: src/content/induccion/faq.json
+        format: json
+        fields:
+          - label: Preguntas
+            name: items
+            widget: list
+            fields:
+              - { label: Pregunta, name: pregunta, widget: string }
+              - { label: Respuesta, name: respuesta, widget: text }
+
+      - name: impacto
+        label: Métricas de impacto
+        file: src/content/induccion/impact.json
+        format: json
+        fields:
+          - label: Métricas
+            name: items
+            widget: list
+            fields:
+              - { label: Valor, name: value, widget: string }
+              - { label: Etiqueta, name: label, widget: string }
+              - { label: Nota interna, name: note, widget: text }
