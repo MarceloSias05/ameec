@@ -1,0 +1,87 @@
+---
+import Layout from '@layouts/Layout.astro';
+import Header from '@components/Header.astro';
+import Footer from '@components/Footer.astro';
+
+const herramientas = [
+  {
+    nombre: 'Discord',
+    icono: '💬',
+    desc: 'Canal principal de comunicación del equipo. Aquí encontrarás anuncios, canales por proyecto y comunicación directa con tu coordinador/a.',
+    pasos: ['Descarga Discord en discord.com', 'Crea tu cuenta con tu correo institucional', 'Solicita el link de invitación al servidor AMEEC a hola@ameec.org'],
+    color: 'bg-[#5865F2]',
+  },
+  {
+    nombre: 'Trello',
+    icono: '📋',
+    desc: 'Gestión de tareas y seguimiento de proyectos. Cada equipo tiene su tablero donde registras avances, entregables y pendientes.',
+    pasos: ['Crea cuenta en trello.com', 'Solicita acceso al tablero de tu proyecto', 'Actualiza tus tarjetas cada semana'],
+    color: 'bg-[#0052CC]',
+  },
+  {
+    nombre: 'Classroom',
+    icono: '📚',
+    desc: 'Plataforma de formación. Aquí están los materiales de estudio, lecturas recomendadas, grabaciones de sesiones y entregas formativas.',
+    pasos: ['Accede con tu cuenta de Google', 'Solicita el código de clase a tu coordinador/a', 'Revisa los materiales semanalmente'],
+    color: 'bg-verde-500',
+  },
+];
+---
+
+<Layout
+  title="Herramientas de Trabajo — AMEEC"
+  description="Guía de las herramientas digitales que usamos en AMEEC: Discord, Trello y Google Classroom."
+>
+  <Header />
+  <main id="main">
+    <section class="bg-carbon py-16 text-white">
+      <div class="container-narrow">
+        <a href="/#pasos" class="mb-6 inline-flex items-center gap-2 text-sm text-white/60 hover:text-white transition-colors">
+          <svg viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4"><path fill-rule="evenodd" d="M17 10a.75.75 0 01-.75.75H5.612l4.158 3.96a.75.75 0 11-1.04 1.08l-5.5-5.25a.75.75 0 010-1.08l5.5-5.25a.75.75 0 111.04 1.08L5.612 9.25H16.25A.75.75 0 0117 10z" clip-rule="evenodd"/></svg>
+          Volver a los módulos
+        </a>
+        <p class="eyebrow mb-3 text-ocre-200">Módulo 2</p>
+        <h1 class="font-display text-5xl font-bold md:text-6xl">Herramientas<br/>de trabajo</h1>
+        <p class="mt-4 max-w-xl text-white/70 leading-relaxed">Las plataformas digitales que usamos para comunicarnos, organizar tareas y acceder a los materiales de formación.</p>
+      </div>
+    </section>
+
+    <section class="container-narrow py-16 md:py-20 space-y-8">
+      {herramientas.map((h, i) => (
+        <div data-reveal data-reveal-delay={String(i * 100)} class="grid gap-6 rounded-3xl bg-white p-8 shadow-sm border border-carbon/5 md:grid-cols-[auto_1fr]">
+          <div class={`${h.color} flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl text-3xl`}>
+            {h.icono}
+          </div>
+          <div>
+            <h2 class="mb-2 font-display text-2xl font-bold text-carbon">{h.nombre}</h2>
+            <p class="mb-5 text-sm leading-relaxed text-carbon/70">{h.desc}</p>
+            <div class="rounded-2xl bg-crema p-5">
+              <p class="mb-3 text-xs font-semibold uppercase tracking-wider text-carbon/50">Cómo acceder</p>
+              <ol class="space-y-2">
+                {h.pasos.map((paso, j) => (
+                  <li class="flex gap-3 text-sm text-carbon/80">
+                    <span class="font-bold text-ocre-400 shrink-0">{j + 1}.</span>
+                    {paso}
+                  </li>
+                ))}
+              </ol>
+            </div>
+          </div>
+        </div>
+      ))}
+    </section>
+
+    <section class="bg-crema py-12">
+      <div class="container-narrow flex flex-col items-center gap-4 text-center sm:flex-row sm:justify-between sm:text-left">
+        <div>
+          <p class="font-semibold text-carbon">¿Tienes problema con alguna herramienta?</p>
+          <p class="text-sm text-carbon/60">Escríbenos y te ayudamos a configurar tu acceso.</p>
+        </div>
+        <a href="mailto:hola@ameec.org?subject=Ayuda con herramientas AMEEC" class="btn-primary whitespace-nowrap">
+          Pedir ayuda
+        </a>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

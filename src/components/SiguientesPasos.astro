@@ -1,0 +1,84 @@
+---
+import { Image } from 'astro:assets';
+import fotoInduccion from '../assets/ameec-comunidad.jpg';
+import fotoBio from '../assets/ameec-bioconstruccion.jpg';
+import fotoProy from '../assets/ameec-olas.jpg';
+
+const modulos = [
+  {
+    foto: fotoInduccion,
+    fotoAlt: 'Sesión de inducción AMEEC con el equipo completo',
+    items: ['¿Qué es AMEEC?', 'Legalidad', 'Responsabilidad Social', 'Investigación'],
+    cta: 'Inducción',
+    href: '/modulos/induccion',
+    color: 'bg-verde-500',
+  },
+  {
+    foto: fotoBio,
+    fotoAlt: 'Herramientas de trabajo y colaboración en AMEEC',
+    items: ['Discord', 'Trello', 'Classroom'],
+    cta: 'Herramientas de trabajo',
+    href: '/modulos/herramientas',
+    color: 'bg-carbon',
+  },
+  {
+    foto: fotoProy,
+    fotoAlt: 'Voluntarios AMEEC conociendo sus derechos y obligaciones',
+    items: ['Derechos y Obligaciones'],
+    cta: 'Derechos y Obligaciones',
+    href: '/modulos/derechos',
+    color: 'bg-ocre-500',
+  },
+];
+---
+
+<section id="pasos" class="py-20 md:py-28" style="background-color: #4a5e3a;">
+  <div class="container-narrow">
+    <h2 class="mb-14 text-center font-display text-5xl font-bold text-white md:text-6xl">
+      Siguientes pasos
+    </h2>
+
+    <div class="grid gap-6 md:grid-cols-3">
+      {modulos.map((mod, i) => (
+        <div
+          data-reveal
+          data-reveal-delay={String(i * 120)}
+          class="flex flex-col overflow-hidden rounded-3xl bg-white shadow-lg"
+        >
+          <!-- Foto -->
+          <div class="relative h-56 overflow-hidden">
+            <Image
+              src={mod.foto}
+              alt={mod.fotoAlt}
+              width={500}
+              height={350}
+              class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+            />
+          </div>
+
+          <!-- Contenido -->
+          <div class="flex flex-1 flex-col p-6">
+            <ul class="mb-6 flex-1 space-y-2">
+              {mod.items.map((item) => (
+                <li class="flex items-start gap-2 text-sm text-carbon/80">
+                  <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-ocre-400"></span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+
+            <a
+              href={mod.href}
+              class={`${mod.color} flex items-center justify-center gap-2 rounded-full px-6 py-3.5 font-bold uppercase tracking-wider text-white transition-opacity hover:opacity-90`}
+            >
+              {mod.cta}
+              <svg viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4" aria-hidden="true">
+                <path fill-rule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clip-rule="evenodd"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,90 @@
+---
+import Layout from '@layouts/Layout.astro';
+import Header from '@components/Header.astro';
+import Footer from '@components/Footer.astro';
+
+const derechos = [
+  'Recibir orientación y acompañamiento durante toda tu estancia.',
+  'Acceder a los materiales de formación y talleres del programa.',
+  'Contar con una persona coordinadora asignada como punto de contacto.',
+  'Recibir carta de liberación y documentación al completar las horas requeridas.',
+  'Participar en espacios de retroalimentación y evaluación del programa.',
+  'Ser tratado/a con respeto y dignidad en todos los espacios de AMEEC.',
+];
+
+const obligaciones = [
+  'Cumplir con las horas de servicio acordadas en el convenio institucional.',
+  'Comunicar con anticipación cualquier ausencia o cambio de disponibilidad.',
+  'Mantener confidencialidad sobre la información sensible de la organización y sus comunidades.',
+  'Actualizar tus avances en Trello y entregar los productos acordados en tiempo y forma.',
+  'Participar activamente en las sesiones de formación y retroalimentación.',
+  'Representar a AMEEC con responsabilidad en actividades presenciales y digitales.',
+];
+---
+
+<Layout
+  title="Derechos y Obligaciones — AMEEC"
+  description="Conoce tus derechos y obligaciones como prestador/a de servicio social en AMEEC."
+>
+  <Header />
+  <main id="main">
+    <section class="bg-ocre-500 py-16 text-white">
+      <div class="container-narrow">
+        <a href="/#pasos" class="mb-6 inline-flex items-center gap-2 text-sm text-white/70 hover:text-white transition-colors">
+          <svg viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4"><path fill-rule="evenodd" d="M17 10a.75.75 0 01-.75.75H5.612l4.158 3.96a.75.75 0 11-1.04 1.08l-5.5-5.25a.75.75 0 010-1.08l5.5-5.25a.75.75 0 111.04 1.08L5.612 9.25H16.25A.75.75 0 0117 10z" clip-rule="evenodd"/></svg>
+          Volver a los módulos
+        </a>
+        <p class="eyebrow mb-3 text-white/70">Módulo 3</p>
+        <h1 class="font-display text-5xl font-bold md:text-6xl">Derechos y<br/>Obligaciones</h1>
+        <p class="mt-4 max-w-xl text-white/80 leading-relaxed">Lo que puedes esperar de AMEEC y lo que AMEEC espera de ti. Una relación clara es una relación que funciona.</p>
+      </div>
+    </section>
+
+    <section class="container-narrow py-16 md:py-20 grid gap-8 md:grid-cols-2">
+      <!-- Derechos -->
+      <div data-reveal class="rounded-3xl bg-verde-500 p-8 text-white">
+        <div class="mb-6 flex items-center gap-3">
+          <span class="flex h-10 w-10 items-center justify-center rounded-full bg-white/20 text-xl">✓</span>
+          <h2 class="font-display text-2xl font-bold">Tus derechos</h2>
+        </div>
+        <ul class="space-y-4">
+          {derechos.map((d) => (
+            <li class="flex gap-3 text-sm leading-relaxed text-white/90">
+              <span class="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-ocre-300"></span>
+              {d}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Obligaciones -->
+      <div data-reveal data-reveal-delay="120" class="rounded-3xl bg-white p-8 shadow-sm border border-carbon/5">
+        <div class="mb-6 flex items-center gap-3">
+          <span class="flex h-10 w-10 items-center justify-center rounded-full bg-ocre-100 text-xl">📋</span>
+          <h2 class="font-display text-2xl font-bold text-carbon">Tus obligaciones</h2>
+        </div>
+        <ul class="space-y-4">
+          {obligaciones.map((o) => (
+            <li class="flex gap-3 text-sm leading-relaxed text-carbon/80">
+              <span class="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-ocre-400"></span>
+              {o}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <section class="bg-crema py-12">
+      <div class="container-narrow flex flex-col items-center gap-4 text-center sm:flex-row sm:justify-between sm:text-left">
+        <div>
+          <p class="font-semibold text-carbon">¿Alguna duda sobre el convenio o tu situación?</p>
+          <p class="text-sm text-carbon/60">Habla directamente con tu coordinador/a o escríbenos.</p>
+        </div>
+        <a href="mailto:hola@ameec.org?subject=Pregunta derechos y obligaciones AMEEC" class="btn-primary whitespace-nowrap">
+          Contactar al equipo
+        </a>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

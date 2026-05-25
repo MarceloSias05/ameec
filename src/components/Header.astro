@@ -10,6 +10,7 @@ const nav = [
 <header
   id="site-header"
   class="sticky top-0 z-40 w-full transition-all duration-300"
+  data-transparent="true"
 >
 <div class="container-narrow relative flex items-center justify-between py-5">
   <a href="/" class="font-display text-2xl font-bold text-verde-500" aria-label="AMEEC — Inicio">
@@ -80,16 +81,41 @@ const nav = [
 </header>
 
 <script>
-  // Sticky header: añade fondo blur al hacer scroll
+  // Sticky header: transparente sobre hero fullscreen, sólido al hacer scroll
   const header = document.getElementById('site-header');
   if (header) {
+    const isTransparent = header.dataset.transparent === 'true';
+
     const onScroll = () => {
-      if (window.scrollY > 20) {
-        header.classList.add('bg-crema/90', 'backdrop-blur-md', 'shadow-sm', 'border-b', 'border-carbon/5');
+      const pastHero = window.scrollY > window.innerHeight * 0.6;
+
+      if (pastHero || !isTransparent) {
+        header.classList.add('bg-crema/95', 'backdrop-blur-md', 'shadow-sm', 'border-b', 'border-carbon/5');
+        header.classList.remove('text-white');
+        logo.classList.remove('text-white');
+        logo.classList.add('text-verde-500');
+        navLinks.forEach(l => { l.classList.remove('text-white/80'); l.classList.add('text-carbon/80'); });
+        ctaBtn.classList.remove('bg-white', 'text-carbon');
+        ctaBtn.classList.add('bg-verde-500', 'text-white');
+        menuBtn?.classList.remove('border-white/30', 'text-white');
+        menuBtn?.classList.add('border-carbon/10', 'text-verde-500', 'bg-white');
       } else {
-        header.classList.remove('bg-crema/90', 'backdrop-blur-md', 'shadow-sm', 'border-b', 'border-carbon/5');
+        header.classList.remove('bg-crema/95', 'backdrop-blur-md', 'shadow-sm', 'border-b', 'border-carbon/5');
+        logo.classList.add('text-white');
+        logo.classList.remove('text-verde-500');
+        navLinks.forEach(l => { l.classList.add('text-white/80'); l.classList.remove('text-carbon/80'); });
+        ctaBtn.classList.add('bg-white', 'text-carbon');
+        ctaBtn.classList.remove('bg-verde-500', 'text-white');
+        menuBtn?.classList.add('border-white/30', 'text-white');
+        menuBtn?.classList.remove('border-carbon/10', 'text-verde-500', 'bg-white');
       }
     };
+
+    const logo = header.querySelector('a[aria-label]') as HTMLElement;
+    const navLinks = header.querySelectorAll('nav a');
+    const ctaBtn = header.querySelector('a[href="#inscribete"]') as HTMLElement;
+    const menuBtn = header.querySelector('[data-menu-toggle]') as HTMLElement;
+
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
   }

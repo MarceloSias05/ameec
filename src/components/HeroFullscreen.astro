@@ -1,0 +1,57 @@
+---
+import { Image } from 'astro:assets';
+import heroImg from '../assets/ameec-bioconstruccion.jpg';
+import general from '../content/config/general.json';
+---
+
+<section class="relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden text-white">
+  <!-- Imagen de fondo -->
+  <Image
+    src={heroImg}
+    alt="Campo de cultivo AMEEC"
+    class="absolute inset-0 h-full w-full object-cover object-center"
+    loading="eager"
+    widths={[768, 1280, 1920]}
+    sizes="100vw"
+  />
+  <!-- Overlay degradado -->
+  <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70"></div>
+
+  <!-- Contenido centrado -->
+  <div class="relative z-10 flex flex-col items-center px-6 text-center">
+    <!-- Logo -->
+    <div class="mb-10 flex items-center gap-3">
+      <svg viewBox="0 0 40 40" class="h-10 w-10" aria-hidden="true">
+        <rect width="40" height="40" rx="8" fill="#C97B4A" opacity="0.9"/>
+        <text x="20" y="28" font-family="serif" font-size="22" font-weight="bold" text-anchor="middle" fill="white">A</text>
+      </svg>
+      <span class="font-display text-2xl font-bold tracking-wide">AMEEC</span>
+    </div>
+
+    <h1 class="font-display text-5xl font-bold leading-tight md:text-7xl lg:text-8xl">
+      ¿Listo para la
+      <span class="block italic text-ocre-200">siguiente aventura?</span>
+    </h1>
+
+    <p class="mt-6 text-lg font-semibold uppercase tracking-[0.3em] text-white/80">
+      Bienvenidos
+    </p>
+
+    <a
+      href="#bienvenida"
+      class="mt-12 flex items-center gap-2 rounded-full bg-white px-8 py-4 font-bold uppercase tracking-widest text-carbon transition-all duration-300 hover:bg-ocre-400 hover:text-white"
+    >
+      Empezar
+      <svg viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4" aria-hidden="true">
+        <path fill-rule="evenodd" d="M10 3a.75.75 0 01.75.75v10.69l3.22-3.22a.75.75 0 111.06 1.06l-4.5 4.5a.75.75 0 01-1.06 0l-4.5-4.5a.75.75 0 111.06-1.06l3.22 3.22V3.75A.75.75 0 0110 3z" clip-rule="evenodd"/>
+      </svg>
+    </a>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce opacity-50">
+    <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" class="h-6 w-6">
+      <path d="M12 5v14M5 12l7 7 7-7"/>
+    </svg>
+  </div>
+</section>

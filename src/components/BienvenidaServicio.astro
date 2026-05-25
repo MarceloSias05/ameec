@@ -1,0 +1,41 @@
+---
+import { Image } from 'astro:assets';
+import comunidadPhoto from '../assets/ameec-comunidad.jpg';
+---
+
+<section id="bienvenida" class="bg-verde-600 py-20 text-white md:py-28" style="background-color: #4a5e3a;">
+  <div class="container-narrow grid items-center gap-12 md:grid-cols-2">
+    <div>
+      <h2 class="font-display text-4xl font-bold leading-tight md:text-5xl lg:text-6xl">
+        Bienvenidos al<br />
+        <span class="italic text-ocre-200">Servicio Social</span><br />
+        en AMEEC
+      </h2>
+      <p class="mt-6 text-lg leading-relaxed text-white/80">
+        En esta página encontrarás la guía completa de todo el acceso a la inducción y material de apoyo durante tu estancia.
+      </p>
+      <a href="#pasos" class="mt-8 inline-flex items-center gap-2 rounded-full border-2 border-white/40 px-6 py-3 text-sm font-medium text-white transition-colors hover:border-white hover:bg-white hover:text-verde-500">
+        Ver los módulos
+        <svg viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4" aria-hidden="true">
+          <path fill-rule="evenodd" d="M5.22 14.78a.75.75 0 001.06 0l7.22-7.22v5.69a.75.75 0 001.5 0v-7.5a.75.75 0 00-.75-.75h-7.5a.75.75 0 000 1.5h5.69l-7.22 7.22a.75.75 0 000 1.06z" clip-rule="evenodd" />
+        </svg>
+      </a>
+    </div>
+
+    <div class="relative">
+      <div class="overflow-hidden rounded-3xl shadow-2xl">
+        <Image
+          src={comunidadPhoto}
+          alt="Equipo AMEEC en sesión de inducción"
+          width={700}
+          height={520}
+          class="h-80 w-full object-cover"
+        />
+      </div>
+      <div class="absolute -bottom-4 -right-4 rounded-2xl bg-ocre-400 px-5 py-4 text-white shadow-lg">
+        <p class="font-display text-2xl font-bold">y juntos</p>
+        <p class="text-sm opacity-90">lograremos grandes cosas</p>
+      </div>
+    </div>
+  </div>
+</section>

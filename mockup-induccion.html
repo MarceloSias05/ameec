@@ -1,0 +1,737 @@
+<!doctype html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AMEEC — Boceto de Rediseño · Sitio de Inducción</title>
+  <meta name="description" content="Propuesta visual de rediseño del sitio de inducción AMEEC — Asociación Mexicana de Educación Ecológica y Comunitaria." />
+
+  <!-- Tailwind CDN v3 + config personalizado -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            verde:  { 300:'#8FAB8F', 400:'#658765', 500:'#3F5E3F', 600:'#324B32', 700:'#263926' },
+            ocre:   { 200:'#E7B58F', 300:'#D89760', 400:'#C97B4A', 500:'#B26439', 600:'#8E4F2D' },
+            crema:  '#F4EFE6',
+            carbon: '#1F2922',
+            olive:  '#4a5e3a',
+          },
+          fontFamily: {
+            display: ['Fraunces', 'Georgia', 'serif'],
+            sans:    ['Inter', 'system-ui', 'sans-serif'],
+          },
+          boxShadow: {
+            clay: '4px 4px 0 0 rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.15)',
+            'clay-sm': '2px 2px 0 0 rgba(0,0,0,.14)',
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- Fuentes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,700;9..144,0,800;9..144,1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* Base */
+    body { font-family: 'Inter', system-ui, sans-serif; background: #F4EFE6; color: #1F2922; -webkit-font-smoothing: antialiased; }
+    h1, h2, h3, h4 { font-family: 'Fraunces', Georgia, serif; }
+
+    /* Hero background: degradado que evoca campo abierto / naturaleza oscura */
+    .hero-bg {
+      background:
+        linear-gradient(to bottom, rgba(0,0,0,.65) 0%, rgba(20,35,15,.45) 60%, rgba(0,0,0,.72) 100%),
+        radial-gradient(ellipse at 30% 40%, #2d4a1e 0%, #1a3010 35%, #0d1f08 70%, #080f04 100%);
+    }
+
+    /* Scroll reveal */
+    [data-reveal] { opacity: 0; transform: translateY(22px); transition: opacity .65s cubic-bezier(.16,1,.3,1), transform .65s cubic-bezier(.16,1,.3,1); }
+    [data-reveal].visible { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) { [data-reveal] { opacity:1; transform:none; transition:none; } }
+
+    /* FAQ */
+    details > summary { list-style: none; cursor: pointer; }
+    details > summary::-webkit-details-marker { display: none; }
+    details[open] .faq-icon { transform: rotate(45deg); }
+    .faq-icon { transition: transform 250ms ease; }
+
+    /* Selection */
+    ::selection { background: #C97B4A; color: #fff; }
+  </style>
+</head>
+
+<body class="antialiased">
+
+<!-- ═══════════════════════════════════════════════
+     SKIP NAV (accesibilidad)
+════════════════════════════════════════════════ -->
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:z-[9999] focus:top-3 focus:left-3 focus:bg-verde-500 focus:text-white focus:px-4 focus:py-2 focus:rounded-full focus:text-sm focus:font-medium">
+  Saltar al contenido
+</a>
+
+<!-- ═══════════════════════════════════════════════
+     HEADER — transparente sobre hero, sólido al bajar
+════════════════════════════════════════════════ -->
+<header id="site-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between py-4">
+
+      <!-- Logo -->
+      <a href="#" aria-label="AMEEC — Inicio" class="flex items-center gap-2.5 group">
+        <div class="flex h-9 w-9 items-center justify-center rounded-xl bg-ocre-400 font-display text-lg font-bold text-white shadow-clay-sm transition-transform duration-200 group-hover:scale-105">
+          A
+        </div>
+        <span id="logo-text" class="font-display text-xl font-bold text-white transition-colors duration-300">
+          AMEEC<span class="text-ocre-400">.</span>
+        </span>
+      </a>
+
+      <!-- Nav desktop -->
+      <nav class="hidden items-center gap-7 md:flex" aria-label="Navegación principal">
+        <a href="#bienvenida" data-nav class="text-sm font-medium text-white/85 transition-colors duration-200 hover:text-ocre-300">Bienvenida</a>
+        <a href="#pasos" data-nav class="text-sm font-medium text-white/85 transition-colors duration-200 hover:text-ocre-300">Módulos</a>
+        <a href="#proceso" data-nav class="text-sm font-medium text-white/85 transition-colors duration-200 hover:text-ocre-300">Proceso</a>
+        <a href="#faq" data-nav class="text-sm font-medium text-white/85 transition-colors duration-200 hover:text-ocre-300">Preguntas</a>
+        <a href="#inscripcion" id="cta-nav" class="cursor-pointer rounded-full bg-white px-5 py-2 text-sm font-semibold text-carbon shadow-clay-sm transition-all duration-200 hover:bg-ocre-400 hover:text-white hover:shadow-clay">
+          Inscribirme
+        </a>
+      </nav>
+
+      <!-- Hamburger mobile -->
+      <button id="menu-btn" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu"
+        class="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-white/30 text-white transition-colors md:hidden hover:bg-white/15">
+        <svg id="icon-open" class="h-5 w-5" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+        <svg id="icon-close" class="hidden h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+          <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="hidden border-t border-white/10 bg-carbon/95 backdrop-blur-md md:hidden">
+    <nav class="mx-auto max-w-6xl space-y-1 px-4 py-4" aria-label="Menú móvil">
+      <a href="#bienvenida" class="block rounded-xl px-4 py-3 text-sm font-medium text-white/80 hover:bg-white/10 hover:text-white">Bienvenida</a>
+      <a href="#pasos" class="block rounded-xl px-4 py-3 text-sm font-medium text-white/80 hover:bg-white/10 hover:text-white">Módulos</a>
+      <a href="#proceso" class="block rounded-xl px-4 py-3 text-sm font-medium text-white/80 hover:bg-white/10 hover:text-white">Proceso</a>
+      <a href="#faq" class="block rounded-xl px-4 py-3 text-sm font-medium text-white/80 hover:bg-white/10 hover:text-white">Preguntas</a>
+      <a href="#inscripcion" class="mt-2 block rounded-full bg-ocre-400 px-4 py-3 text-center text-sm font-semibold text-white">Inscribirme</a>
+    </nav>
+  </div>
+</header>
+
+
+<!-- ═══════════════════════════════════════════════
+     MAIN
+════════════════════════════════════════════════ -->
+<main id="main">
+
+<!-- ─────────────────────────────────────────────
+     1. HERO FULLSCREEN
+───────────────────────────────────────────── -->
+<section class="hero-bg relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 text-white">
+
+  <!-- Partículas decorativas (SVG) -->
+  <svg class="pointer-events-none absolute inset-0 h-full w-full opacity-10" aria-hidden="true" preserveAspectRatio="xMidYMid slice">
+    <circle cx="15%" cy="25%" r="180" fill="#C97B4A" opacity=".4"/>
+    <circle cx="82%" cy="70%" r="220" fill="#3F5E3F" opacity=".5"/>
+    <circle cx="60%" cy="15%" r="100" fill="#C97B4A" opacity=".25"/>
+  </svg>
+
+  <div class="relative z-10 flex flex-col items-center text-center">
+    <!-- Badge -->
+    <span class="mb-8 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[.2em] text-white/80 backdrop-blur-sm">
+      <span class="h-1.5 w-1.5 animate-pulse rounded-full bg-ocre-400"></span>
+      Asociación Mexicana de Educación Ecológica
+    </span>
+
+    <!-- Título -->
+    <h1 class="font-display text-5xl font-bold leading-[1.08] md:text-7xl lg:text-8xl">
+      ¿Listo para la<br />
+      <em class="italic text-ocre-300 not-italic" style="font-style:italic">siguiente aventura?</em>
+    </h1>
+
+    <!-- Subtítulo -->
+    <p class="mt-7 text-base font-semibold uppercase tracking-[.35em] text-white/70 md:text-lg">
+      Bienvenidos
+    </p>
+
+    <!-- CTA -->
+    <a href="#bienvenida"
+      class="mt-12 inline-flex cursor-pointer items-center gap-2.5 rounded-full bg-white px-8 py-4 font-bold text-carbon shadow-clay transition-all duration-250 hover:bg-ocre-400 hover:text-white hover:shadow-none focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
+      Empezar
+      <svg class="h-4 w-4" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+        <path fill-rule="evenodd" d="M8 1a.75.75 0 01.75.75v8.69l3.22-3.22a.75.75 0 111.06 1.06l-4.5 4.5a.75.75 0 01-1.06 0l-4.5-4.5a.75.75 0 111.06-1.06l3.22 3.22V1.75A.75.75 0 018 1z" clip-rule="evenodd"/>
+      </svg>
+    </a>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-10 left-1/2 -translate-x-1/2 opacity-50" aria-hidden="true">
+    <div class="mx-auto h-10 w-6 rounded-full border-2 border-white/40 flex items-start justify-center pt-2">
+      <div class="h-2 w-1 animate-bounce rounded-full bg-white"></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ─────────────────────────────────────────────
+     2. BIENVENIDA AL SERVICIO SOCIAL
+───────────────────────────────────────────── -->
+<section id="bienvenida" class="py-20 md:py-28" style="background-color:#4a5e3a;">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <div class="grid items-center gap-12 md:grid-cols-2">
+
+      <!-- Texto -->
+      <div data-reveal>
+        <p class="mb-4 text-xs font-semibold uppercase tracking-[.2em]" style="color:#C97B4A;">Programa de Servicio Social</p>
+        <h2 class="font-display text-4xl font-bold leading-tight text-white md:text-5xl lg:text-6xl">
+          Bienvenidos al<br />
+          <span class="italic" style="color:#E7B58F;">Servicio Social</span><br />
+          en AMEEC
+        </h2>
+        <p class="mt-6 text-base leading-relaxed md:text-lg" style="color:rgba(255,255,255,.75);">
+          En esta página encontrarás la guía completa de todo el acceso a la inducción y material de apoyo durante tu estancia.
+        </p>
+        <a href="#pasos"
+          class="mt-8 inline-flex cursor-pointer items-center gap-2 rounded-full border-2 px-6 py-3 text-sm font-semibold text-white transition-all duration-200 hover:bg-white hover:text-olive focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+          style="border-color:rgba(255,255,255,.35);">
+          Ver módulos
+          <svg class="h-4 w-4" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+            <path fill-rule="evenodd" d="M2 8a.75.75 0 01.75-.75h9.19L8.47 3.78a.75.75 0 011.06-1.06l4.5 4.5a.75.75 0 010 1.06l-4.5 4.5a.75.75 0 01-1.06-1.06l3.22-3.47H2.75A.75.75 0 012 8z" clip-rule="evenodd"/>
+          </svg>
+        </a>
+      </div>
+
+      <!-- Imagen placeholder -->
+      <div data-reveal class="relative" style="transition-delay:120ms">
+        <div class="overflow-hidden rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,.35)]">
+          <!-- Placeholder visual: gradiente que evoca foto grupal -->
+          <div class="flex h-72 flex-col items-center justify-center md:h-80" style="background: linear-gradient(135deg, #2d4a1e 0%, #3F5E3F 50%, #4a5e3a 100%);">
+            <svg class="h-14 w-14 opacity-30 text-white" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M7.5 6.5C7.5 8.981 9.519 11 12 11s4.5-2.019 4.5-4.5S14.481 2 12 2 7.5 4.019 7.5 6.5zM20 21h1v-1c0-3.859-3.141-7-7-7h-4c-3.86 0-7 3.141-7 7v1h17z"/>
+            </svg>
+            <p class="mt-3 text-xs font-medium text-white/40 uppercase tracking-widest">Fotografía del equipo</p>
+          </div>
+        </div>
+        <!-- Badge flotante -->
+        <div class="absolute -bottom-5 -left-4 rounded-2xl px-5 py-4 text-white shadow-clay"
+          style="background:#C97B4A;">
+          <p class="font-display text-lg font-bold leading-tight">y juntos</p>
+          <p class="text-xs opacity-85">lograremos grandes cosas</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ─────────────────────────────────────────────
+     3. SIGUIENTES PASOS — 3 tarjetas de módulos
+───────────────────────────────────────────── -->
+<section id="pasos" class="pb-24 pt-16 md:pb-32 md:pt-20" style="background-color:#4a5e3a;">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <h2 data-reveal class="mb-14 text-center font-display text-5xl font-bold text-white md:text-6xl">
+      Siguientes pasos
+    </h2>
+
+    <div class="grid gap-6 md:grid-cols-3">
+
+      <!-- Módulo 1: Inducción -->
+      <article data-reveal class="flex flex-col overflow-hidden rounded-3xl bg-white shadow-clay transition-transform duration-200 hover:-translate-y-1 hover:shadow-[6px_6px_0_0_rgba(0,0,0,.20)] cursor-pointer">
+        <div class="relative h-52 overflow-hidden" style="background: linear-gradient(135deg,#3F5E3F,#5a8a5a);">
+          <div class="absolute inset-0 flex flex-col items-center justify-center">
+            <svg class="h-10 w-10 text-white/40" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/>
+            </svg>
+            <p class="mt-2 text-xs font-medium text-white/30 uppercase tracking-widest">Foto sesión grupal</p>
+          </div>
+          <div class="absolute bottom-4 left-4 rounded-full bg-verde-500 px-3 py-1 text-xs font-bold text-white uppercase tracking-wider">Módulo 1</div>
+        </div>
+        <div class="flex flex-1 flex-col p-7">
+          <ul class="mb-6 flex-1 space-y-3" role="list">
+            <li class="flex items-start gap-2.5 text-sm text-carbon/80">
+              <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-ocre-400" aria-hidden="true"></span>¿Qué es AMEEC?
+            </li>
+            <li class="flex items-start gap-2.5 text-sm text-carbon/80">
+              <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-ocre-400" aria-hidden="true"></span>Legalidad
+            </li>
+            <li class="flex items-start gap-2.5 text-sm text-carbon/80">
+              <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-ocre-400" aria-hidden="true"></span>Responsabilidad Social
+            </li>
+            <li class="flex items-start gap-2.5 text-sm text-carbon/80">
+              <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-ocre-400" aria-hidden="true"></span>Investigación
+            </li>
+          </ul>
+          <a href="/modulos/induccion"
+            class="flex cursor-pointer items-center justify-between rounded-full bg-carbon px-6 py-3.5 text-sm font-bold uppercase tracking-wider text-white shadow-clay-sm transition-all duration-200 hover:bg-verde-500 hover:shadow-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-carbon">
+            Inducción
+            <svg class="h-4 w-4" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M2 8a.75.75 0 01.75-.75h9.19L8.47 3.78a.75.75 0 011.06-1.06l4.5 4.5a.75.75 0 010 1.06l-4.5 4.5a.75.75 0 01-1.06-1.06L9.94 8.75H2.75A.75.75 0 012 8z" clip-rule="evenodd"/>
+            </svg>
+          </a>
+        </div>
+      </article>
+
+      <!-- Módulo 2: Herramientas -->
+      <article data-reveal class="flex flex-col overflow-hidden rounded-3xl bg-white shadow-clay transition-transform duration-200 hover:-translate-y-1 hover:shadow-[6px_6px_0_0_rgba(0,0,0,.20)] cursor-pointer" style="transition-delay:100ms">
+        <div class="relative h-52 overflow-hidden" style="background: linear-gradient(135deg,#1a3050,#2d5280);">
+          <div class="absolute inset-0 flex flex-col items-center justify-center">
+            <svg class="h-10 w-10 text-white/40" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M20 3H4v10c0 2.21 1.79 4 4 4h6c2.21 0 4-1.79 4-4v-3h2c1.11 0 2-.89 2-2V5c0-1.11-.89-2-2-2zm0 5h-2V5h2v3zM4 19h16v2H4z"/>
+            </svg>
+            <p class="mt-2 text-xs font-medium text-white/30 uppercase tracking-widest">Foto sala de reunión</p>
+          </div>
+          <div class="absolute bottom-4 left-4 rounded-full px-3 py-1 text-xs font-bold text-white uppercase tracking-wider" style="background:#2d5280;">Módulo 2</div>
+        </div>
+        <div class="flex flex-1 flex-col p-7">
+          <ul class="mb-6 flex-1 space-y-3" role="list">
+            <li class="flex items-start gap-2.5 text-sm text-carbon/80">
+              <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-ocre-400" aria-hidden="true"></span>Discord
+            </li>
+            <li class="flex items-start gap-2.5 text-sm text-carbon/80">
+              <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-ocre-400" aria-hidden="true"></span>Trello
+            </li>
+            <li class="flex items-start gap-2.5 text-sm text-carbon/80">
+              <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-ocre-400" aria-hidden="true"></span>Classroom
+            </li>
+          </ul>
+          <a href="/modulos/herramientas"
+            class="flex cursor-pointer items-center justify-between rounded-full bg-carbon px-6 py-3.5 text-sm font-bold uppercase tracking-wider text-white shadow-clay-sm transition-all duration-200 hover:bg-verde-500 hover:shadow-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-carbon">
+            Herramientas de trabajo
+            <svg class="h-4 w-4 shrink-0" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M2 8a.75.75 0 01.75-.75h9.19L8.47 3.78a.75.75 0 011.06-1.06l4.5 4.5a.75.75 0 010 1.06l-4.5 4.5a.75.75 0 01-1.06-1.06L9.94 8.75H2.75A.75.75 0 012 8z" clip-rule="evenodd"/>
+            </svg>
+          </a>
+        </div>
+      </article>
+
+      <!-- Módulo 3: Derechos -->
+      <article data-reveal class="flex flex-col overflow-hidden rounded-3xl bg-white shadow-clay transition-transform duration-200 hover:-translate-y-1 hover:shadow-[6px_6px_0_0_rgba(0,0,0,.20)] cursor-pointer" style="transition-delay:200ms">
+        <div class="relative h-52 overflow-hidden" style="background: linear-gradient(135deg,#5c3a1e,#8E4F2D);">
+          <div class="absolute inset-0 flex flex-col items-center justify-center">
+            <svg class="h-10 w-10 text-white/40" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>
+            </svg>
+            <p class="mt-2 text-xs font-medium text-white/30 uppercase tracking-widest">Foto evento grande</p>
+          </div>
+          <div class="absolute bottom-4 left-4 rounded-full bg-ocre-400 px-3 py-1 text-xs font-bold text-white uppercase tracking-wider">Módulo 3</div>
+        </div>
+        <div class="flex flex-1 flex-col p-7">
+          <ul class="mb-6 flex-1 space-y-3" role="list">
+            <li class="flex items-start gap-2.5 text-sm text-carbon/80">
+              <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-ocre-400" aria-hidden="true"></span>Derechos y Obligaciones
+            </li>
+            <li class="flex items-start gap-2.5 text-sm text-carbon/80">
+              <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-ocre-400" aria-hidden="true"></span>Código de conducta
+            </li>
+            <li class="flex items-start gap-2.5 text-sm text-carbon/80">
+              <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-ocre-400" aria-hidden="true"></span>Liberación de horas
+            </li>
+          </ul>
+          <a href="/modulos/derechos"
+            class="flex cursor-pointer items-center justify-between rounded-full bg-carbon px-6 py-3.5 text-sm font-bold uppercase tracking-wider text-white shadow-clay-sm transition-all duration-200 hover:bg-ocre-400 hover:shadow-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-carbon">
+            Derechos y Obligaciones
+            <svg class="h-4 w-4 shrink-0" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M2 8a.75.75 0 01.75-.75h9.19L8.47 3.78a.75.75 0 011.06-1.06l4.5 4.5a.75.75 0 010 1.06l-4.5 4.5a.75.75 0 01-1.06-1.06L9.94 8.75H2.75A.75.75 0 012 8z" clip-rule="evenodd"/>
+            </svg>
+          </a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+
+<!-- ─────────────────────────────────────────────
+     4. PROCESO — 4 pasos
+───────────────────────────────────────────── -->
+<section id="proceso" class="bg-white py-20 md:py-28">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <div data-reveal class="mb-16 max-w-2xl">
+      <p class="mb-3 text-xs font-semibold uppercase tracking-[.2em] text-ocre-400">El proceso</p>
+      <h2 class="font-display text-4xl font-bold leading-tight text-verde-500 md:text-5xl">
+        Cuatro pasos para empezar
+      </h2>
+    </div>
+
+    <ol class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <li data-reveal class="rounded-2xl border-t-4 border-ocre-400 bg-crema p-7 shadow-clay-sm transition-shadow duration-200 hover:shadow-clay" style="transition-delay:0ms">
+        <span class="font-display text-5xl font-bold text-ocre-400">01</span>
+        <h3 class="mt-4 mb-2 font-display text-xl font-semibold text-verde-500">Conoce</h3>
+        <p class="text-sm leading-relaxed text-carbon/70">Sesión introductoria virtual donde compartimos misión, proyectos y formas reales de participar.</p>
+      </li>
+      <li data-reveal class="rounded-2xl border-t-4 border-ocre-400 bg-crema p-7 shadow-clay-sm transition-shadow duration-200 hover:shadow-clay" style="transition-delay:100ms">
+        <span class="font-display text-5xl font-bold text-ocre-400">02</span>
+        <h3 class="mt-4 mb-2 font-display text-xl font-semibold text-verde-500">Vincúlate</h3>
+        <p class="text-sm leading-relaxed text-carbon/70">Te asignamos una persona mentora que te acompaña en tus primeras semanas.</p>
+      </li>
+      <li data-reveal class="rounded-2xl border-t-4 border-ocre-400 bg-crema p-7 shadow-clay-sm transition-shadow duration-200 hover:shadow-clay" style="transition-delay:200ms">
+        <span class="font-display text-5xl font-bold text-ocre-400">03</span>
+        <h3 class="mt-4 mb-2 font-display text-xl font-semibold text-verde-500">Fórmate</h3>
+        <p class="text-sm leading-relaxed text-carbon/70">Accedes a talleres de bioconstrucción, agroecología y facilitación comunitaria.</p>
+      </li>
+      <li data-reveal class="rounded-2xl border-t-4 border-ocre-400 bg-crema p-7 shadow-clay-sm transition-shadow duration-200 hover:shadow-clay" style="transition-delay:300ms">
+        <span class="font-display text-5xl font-bold text-ocre-400">04</span>
+        <h3 class="mt-4 mb-2 font-display text-xl font-semibold text-verde-500">Contribuye</h3>
+        <p class="text-sm leading-relaxed text-carbon/70">Te sumas a un proyecto activo donde tu trabajo tiene impacto medible en comunidades reales.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+
+<!-- ─────────────────────────────────────────────
+     5. IMPACTO — métricas
+───────────────────────────────────────────── -->
+<section id="impacto" class="py-20 md:py-24" style="background:#3F5E3F;">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <div class="grid gap-10 md:grid-cols-[1fr_1.5fr] md:items-end">
+      <div data-reveal>
+        <p class="mb-4 text-xs font-semibold uppercase tracking-[.2em]" style="color:#E7B58F;">Impacto</p>
+        <h2 class="font-display text-4xl font-bold leading-tight text-white md:text-5xl">
+          Números que cuentan una historia colectiva
+        </h2>
+        <p class="mt-5 text-sm leading-relaxed" style="color:rgba(255,255,255,.65);">
+          Datos pendientes de confirmar con el equipo AMEEC antes de publicar.
+        </p>
+      </div>
+
+      <dl class="grid gap-4 sm:grid-cols-3">
+        <div data-reveal class="rounded-3xl p-6 text-white" style="border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.1);transition-delay:80ms">
+          <dt class="text-xs font-semibold uppercase tracking-wider" style="color:rgba(255,255,255,.6);">Talleres realizados</dt>
+          <dd class="mt-4 font-display text-6xl font-bold" style="color:#E7B58F;">X</dd>
+          <p class="mt-3 text-xs italic" style="color:rgba(255,255,255,.4);">Confirmar con AMEEC</p>
+        </div>
+        <div data-reveal class="rounded-3xl p-6 text-white" style="border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.1);transition-delay:160ms">
+          <dt class="text-xs font-semibold uppercase tracking-wider" style="color:rgba(255,255,255,.6);">Comunidades</dt>
+          <dd class="mt-4 font-display text-6xl font-bold" style="color:#E7B58F;">X</dd>
+          <p class="mt-3 text-xs italic" style="color:rgba(255,255,255,.4);">Confirmar con AMEEC</p>
+        </div>
+        <div data-reveal class="rounded-3xl p-6 text-white" style="border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.1);transition-delay:240ms">
+          <dt class="text-xs font-semibold uppercase tracking-wider" style="color:rgba(255,255,255,.6);">Voluntarios activos</dt>
+          <dd class="mt-4 font-display text-6xl font-bold" style="color:#E7B58F;">X</dd>
+          <p class="mt-3 text-xs italic" style="color:rgba(255,255,255,.4);">Confirmar con AMEEC</p>
+        </div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+
+<!-- ─────────────────────────────────────────────
+     6. TESTIMONIOS
+───────────────────────────────────────────── -->
+<section id="historias" class="py-20 md:py-28" style="background:#F4EFE6;">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <div data-reveal class="mb-14 max-w-2xl">
+      <p class="mb-3 text-xs font-semibold uppercase tracking-[.2em] text-ocre-400">Historias</p>
+      <h2 class="font-display text-4xl font-bold leading-tight text-verde-500 md:text-5xl">
+        Lo que cuentan quienes ya están dentro
+      </h2>
+    </div>
+
+    <div class="grid gap-6 md:grid-cols-3">
+      <blockquote data-reveal class="rounded-2xl border bg-white p-7 shadow-clay-sm transition-shadow duration-200 hover:shadow-clay" style="border-color:rgba(31,41,34,.07);transition-delay:0ms">
+        <svg class="mb-4 h-6 w-6 text-ocre-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+        </svg>
+        <p class="font-display text-lg leading-snug text-carbon">Aprendí a construir con tierra y a escuchar mejor a mi comunidad. Las dos cosas eran urgentes.</p>
+        <footer class="mt-5 text-sm font-semibold text-verde-500">Luis · Tlaxcala · Voluntario 2024</footer>
+      </blockquote>
+
+      <blockquote data-reveal class="rounded-2xl border bg-white p-7 shadow-clay-sm transition-shadow duration-200 hover:shadow-clay" style="border-color:rgba(31,41,34,.07);transition-delay:120ms">
+        <svg class="mb-4 h-6 w-6 text-ocre-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+        </svg>
+        <p class="font-display text-lg leading-snug text-carbon">Pasé de asistir a talleres a coordinar uno. AMEEC abre camino al que llega con ganas.</p>
+        <footer class="mt-5 text-sm font-semibold text-verde-500">Daniela · CDMX · Coordinadora</footer>
+      </blockquote>
+
+      <blockquote data-reveal class="rounded-2xl border bg-white p-7 shadow-clay-sm transition-shadow duration-200 hover:shadow-clay" style="border-color:rgba(31,41,34,.07);transition-delay:240ms">
+        <svg class="mb-4 h-6 w-6 text-ocre-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+        </svg>
+        <p class="font-display text-lg leading-snug text-carbon">Encontré un lenguaje común para hablar de ecología y comunidad sin tecnicismos huecos.</p>
+        <footer class="mt-5 text-sm font-semibold text-verde-500">Ernesto · Oaxaca · Facilitador</footer>
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+
+<!-- ─────────────────────────────────────────────
+     7. FAQ
+───────────────────────────────────────────── -->
+<section id="faq" class="bg-white py-20 md:py-28">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <div data-reveal class="mb-14 max-w-2xl">
+      <p class="mb-3 text-xs font-semibold uppercase tracking-[.2em] text-ocre-400">Preguntas frecuentes</p>
+      <h2 class="font-display text-4xl font-bold leading-tight text-verde-500 md:text-5xl">
+        Todo lo que quieres saber antes de inscribirte
+      </h2>
+    </div>
+
+    <div class="max-w-3xl space-y-3">
+
+      <details data-reveal class="group overflow-hidden rounded-2xl border border-carbon/10 bg-crema" style="transition-delay:0ms">
+        <summary class="flex cursor-pointer items-center justify-between px-7 py-5 font-medium text-carbon transition-colors duration-200 hover:text-verde-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-verde-500">
+          <span>¿Necesito experiencia previa en ecología o construcción?</span>
+          <svg class="faq-icon h-5 w-5 shrink-0 text-ocre-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z"/>
+          </svg>
+        </summary>
+        <div class="px-7 pb-6 text-sm leading-relaxed text-carbon/70">
+          No. AMEEC está pensada para personas de todos los niveles. Lo que sí pedimos es disposición para aprender y colaborar con la comunidad.
+        </div>
+      </details>
+
+      <details data-reveal class="group overflow-hidden rounded-2xl border border-carbon/10 bg-crema" style="transition-delay:80ms">
+        <summary class="flex cursor-pointer items-center justify-between px-7 py-5 font-medium text-carbon transition-colors duration-200 hover:text-verde-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-verde-500">
+          <span>¿Cuánto tiempo requiere el proceso de inducción?</span>
+          <svg class="faq-icon h-5 w-5 shrink-0 text-ocre-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z"/>
+          </svg>
+        </summary>
+        <div class="px-7 pb-6 text-sm leading-relaxed text-carbon/70">
+          La etapa inicial son aproximadamente 4 semanas con una dedicación de 2 a 4 horas por semana. Después tú defines tu nivel de compromiso según el proyecto al que te sumes.
+        </div>
+      </details>
+
+      <details data-reveal class="group overflow-hidden rounded-2xl border border-carbon/10 bg-crema" style="transition-delay:160ms">
+        <summary class="flex cursor-pointer items-center justify-between px-7 py-5 font-medium text-carbon transition-colors duration-200 hover:text-verde-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-verde-500">
+          <span>¿Tiene algún costo participar?</span>
+          <svg class="faq-icon h-5 w-5 shrink-0 text-ocre-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z"/>
+          </svg>
+        </summary>
+        <div class="px-7 pb-6 text-sm leading-relaxed text-carbon/70">
+          La inducción es completamente gratuita. Algunos talleres especializados tienen una cuota de recuperación simbólica para materiales. Nadie queda fuera por falta de recursos — consúltanos.
+        </div>
+      </details>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ─────────────────────────────────────────────
+     8. FORMULARIO DE INSCRIPCIÓN
+───────────────────────────────────────────── -->
+<section id="inscripcion" class="py-20 md:py-28" style="background:#3F5E3F;">
+  <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
+    <div data-reveal>
+      <p class="mb-4 text-xs font-semibold uppercase tracking-[.2em]" style="color:#E7B58F;">Inscripción</p>
+      <h2 class="font-display text-4xl font-bold leading-tight text-white md:text-5xl">
+        ¿Listas, listos para empezar?
+      </h2>
+      <p class="mt-5 text-base leading-relaxed" style="color:rgba(255,255,255,.75);">
+        La próxima sesión de bienvenida es el primer sábado de cada mes. Solo necesitas una hora.
+      </p>
+    </div>
+
+    <form data-reveal action="https://formspree.io/f/YOUR_ID" method="POST"
+      class="mt-10 rounded-3xl bg-white p-8 text-left shadow-[0_24px_80px_rgba(0,0,0,.28)]"
+      style="transition-delay:120ms"
+      onsubmit="handleSubmit(event)">
+
+      <input type="hidden" name="_subject" value="Nueva inscripción — Inducción AMEEC" />
+      <input type="hidden" name="_language" value="es" />
+
+      <div class="space-y-5">
+        <div>
+          <label for="nombre" class="mb-2 block text-sm font-semibold text-carbon">Tu nombre completo</label>
+          <input id="nombre" name="nombre" type="text" required
+            placeholder="María García"
+            class="w-full cursor-text rounded-xl border border-carbon/20 px-4 py-3 text-carbon placeholder-carbon/35 transition-colors duration-200 focus:border-ocre-400 focus:outline-none focus:ring-2 focus:ring-ocre-400/20" />
+        </div>
+        <div>
+          <label for="email" class="mb-2 block text-sm font-semibold text-carbon">Correo electrónico</label>
+          <input id="email" name="email" type="email" required
+            placeholder="maria@correo.mx"
+            class="w-full cursor-text rounded-xl border border-carbon/20 px-4 py-3 text-carbon placeholder-carbon/35 transition-colors duration-200 focus:border-ocre-400 focus:outline-none focus:ring-2 focus:ring-ocre-400/20" />
+        </div>
+        <div>
+          <label for="mensaje" class="mb-2 block text-sm font-semibold text-carbon">¿Qué te trae a AMEEC?</label>
+          <textarea id="mensaje" name="mensaje" rows="3" required
+            placeholder="Cuéntanos brevemente..."
+            class="w-full cursor-text resize-none rounded-xl border border-carbon/20 px-4 py-3 text-carbon placeholder-carbon/35 transition-colors duration-200 focus:border-ocre-400 focus:outline-none focus:ring-2 focus:ring-ocre-400/20"></textarea>
+        </div>
+        <button type="submit"
+          class="w-full cursor-pointer rounded-full bg-ocre-400 py-4 font-bold text-white shadow-clay transition-all duration-200 hover:bg-ocre-500 hover:shadow-none active:translate-y-px focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ocre-400">
+          Reservar mi lugar
+        </button>
+      </div>
+    </form>
+  </div>
+</section>
+
+</main><!-- /main -->
+
+
+<!-- ─────────────────────────────────────────────
+     9. FOOTER
+───────────────────────────────────────────── -->
+<footer style="background:#1F2922;" class="pt-14 pb-10 text-white/70">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <div class="grid gap-10 pb-10 sm:grid-cols-2 lg:grid-cols-4">
+
+      <!-- Marca -->
+      <div>
+        <div class="mb-4 flex items-center gap-2.5">
+          <div class="flex h-9 w-9 items-center justify-center rounded-xl bg-ocre-400 font-display text-lg font-bold text-white">A</div>
+          <span class="font-display text-xl font-bold text-white">AMEEC<span class="text-ocre-400">.</span></span>
+        </div>
+        <p class="text-sm leading-relaxed text-white/60">Educación ecológica y bioconstrucción comunitaria desde México.</p>
+      </div>
+
+      <!-- Ecosistema -->
+      <div>
+        <h4 class="mb-4 text-xs font-bold uppercase tracking-[.15em] text-white">Ecosistema</h4>
+        <ul class="space-y-2.5 text-sm">
+          <li><a href="https://ameec.org" class="transition-colors duration-150 hover:text-ocre-400">ameec.org</a></li>
+          <li><a href="/proyectos/olas-de-amor" class="transition-colors duration-150 hover:text-ocre-400">Olas de Amor</a></li>
+          <li><a href="/proyectos/bioconstruccion" class="transition-colors duration-150 hover:text-ocre-400">Bioconstrucción</a></li>
+        </ul>
+      </div>
+
+      <!-- Módulos -->
+      <div>
+        <h4 class="mb-4 text-xs font-bold uppercase tracking-[.15em] text-white">Módulos</h4>
+        <ul class="space-y-2.5 text-sm">
+          <li><a href="/modulos/induccion" class="transition-colors duration-150 hover:text-ocre-400">Inducción</a></li>
+          <li><a href="/modulos/herramientas" class="transition-colors duration-150 hover:text-ocre-400">Herramientas</a></li>
+          <li><a href="/modulos/derechos" class="transition-colors duration-150 hover:text-ocre-400">Derechos y Obligaciones</a></li>
+        </ul>
+      </div>
+
+      <!-- Contacto -->
+      <div>
+        <h4 class="mb-4 text-xs font-bold uppercase tracking-[.15em] text-white">Contacto</h4>
+        <ul class="space-y-2.5 text-sm">
+          <li><a href="mailto:hola@ameec.org" class="transition-colors duration-150 hover:text-ocre-400">hola@ameec.org</a></li>
+          <li><a href="/donar" class="transition-colors duration-150 hover:text-ocre-400">Donar</a></li>
+          <li><a href="/voluntariado" class="transition-colors duration-150 hover:text-ocre-400">Voluntariado</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="border-t pt-8 text-center text-xs" style="border-color:rgba(255,255,255,.08);color:rgba(255,255,255,.35);">
+      <p>© 2026 AMEEC · Hecho con tierra, código y cuidado.</p>
+      <p class="mt-1">
+        <span class="rounded-full border px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider" style="border-color:rgba(201,123,74,.4);color:#C97B4A;">
+          Boceto de rediseño · No publicar sin revisión
+        </span>
+      </p>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ═══════════════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════════════════ -->
+<script>
+// ── 1. Header: transparente → sólido al hacer scroll ──────────────────────
+const header    = document.getElementById('site-header');
+const logoText  = document.getElementById('logo-text');
+const ctaNav    = document.getElementById('cta-nav');
+const navLinks  = document.querySelectorAll('[data-nav]');
+const menuBtn   = document.getElementById('menu-btn');
+
+function updateHeader() {
+  const scrolled = window.scrollY > window.innerHeight * 0.55;
+
+  if (scrolled) {
+    header.style.cssText = 'background:rgba(244,239,230,.96);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 1px 0 rgba(31,41,34,.08)';
+    logoText.style.color      = '#3F5E3F';
+    navLinks.forEach(l => { l.style.color = 'rgba(31,41,34,.75)'; l.onmouseenter = () => l.style.color='#C97B4A'; l.onmouseleave = () => l.style.color='rgba(31,41,34,.75)'; });
+    if (ctaNav) { ctaNav.style.background='#3F5E3F'; ctaNav.style.color='#fff'; }
+    if (menuBtn) { menuBtn.style.borderColor='rgba(31,41,34,.2)'; menuBtn.style.color='#3F5E3F'; }
+  } else {
+    header.style.cssText = '';
+    logoText.style.color      = '#fff';
+    navLinks.forEach(l => { l.style.color = 'rgba(255,255,255,.85)'; l.onmouseenter = () => l.style.color='#E7B58F'; l.onmouseleave = () => l.style.color='rgba(255,255,255,.85)'; });
+    if (ctaNav) { ctaNav.style.background='#fff'; ctaNav.style.color='#1F2922'; }
+    if (menuBtn) { menuBtn.style.borderColor='rgba(255,255,255,.35)'; menuBtn.style.color='#fff'; }
+  }
+}
+window.addEventListener('scroll', updateHeader, { passive: true });
+updateHeader();
+
+
+// ── 2. Menú mobile ─────────────────────────────────────────────────────────
+const mobileMenu = document.getElementById('mobile-menu');
+const iconOpen   = document.getElementById('icon-open');
+const iconClose  = document.getElementById('icon-close');
+
+menuBtn?.addEventListener('click', () => {
+  const isOpen = menuBtn.getAttribute('aria-expanded') === 'true';
+  menuBtn.setAttribute('aria-expanded', String(!isOpen));
+  mobileMenu.classList.toggle('hidden', isOpen);
+  iconOpen.classList.toggle('hidden', !isOpen);
+  iconClose.classList.toggle('hidden', isOpen);
+});
+mobileMenu?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  mobileMenu.classList.add('hidden');
+  iconOpen.classList.remove('hidden');
+  iconClose.classList.add('hidden');
+  menuBtn?.setAttribute('aria-expanded', 'false');
+}));
+
+
+// ── 3. Scroll reveal ───────────────────────────────────────────────────────
+if ('IntersectionObserver' in window) {
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const delay = parseInt(e.target.style.transitionDelay || '0') || 0;
+        setTimeout(() => e.target.classList.add('visible'), delay);
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('[data-reveal]').forEach(el => {
+    const rawDelay = el.style.transitionDelay;
+    if (rawDelay && !rawDelay.endsWith('ms')) el.style.transitionDelay = rawDelay + 'ms';
+    io.observe(el);
+  });
+} else {
+  document.querySelectorAll('[data-reveal]').forEach(el => el.classList.add('visible'));
+}
+
+
+// ── 4. FAQ icon toggle ─────────────────────────────────────────────────────
+document.querySelectorAll('details').forEach(detail => {
+  detail.addEventListener('toggle', () => {
+    const icon = detail.querySelector('.faq-icon');
+    if (icon) icon.style.transform = detail.open ? 'rotate(45deg)' : 'rotate(0deg)';
+  });
+});
+
+
+// ── 5. Form submit (demo) ──────────────────────────────────────────────────
+function handleSubmit(e) {
+  e.preventDefault();
+  const btn  = e.target.querySelector('[type=submit]');
+  const orig = btn.textContent;
+  btn.textContent = 'Enviando…';
+  btn.disabled = true;
+  setTimeout(() => {
+    btn.textContent = '✓ Registro recibido';
+    btn.style.background = '#3F5E3F';
+    setTimeout(() => { btn.textContent = orig; btn.disabled = false; btn.style.background = ''; }, 3000);
+  }, 1200);
+}
+</script>
+
+</body>
+</html>
