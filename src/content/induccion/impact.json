@@ -1,17 +1,17 @@
 {
   "items": [
     {
-      "value": "X",
+      "value": "+120",
       "label": "talleres realizados",
       "note": "Dato pendiente de confirmar con AMEEC."
     },
     {
-      "value": "X",
+      "value": "300",
       "label": "comunidades impactadas",
       "note": "Sustituir antes de publicar."
     },
     {
-      "value": "X",
+      "value": "370",
       "label": "voluntarios activos",
       "note": "Usar el corte operativo más reciente."
     }

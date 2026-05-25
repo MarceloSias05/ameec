@@ -4,10 +4,11 @@
 
 @layer base {
   :root {
-    --color-verde: #3F5E3F;
-    --color-ocre: #C97B4A;
-    --color-crema: #F4EFE6;
+    --color-verde: #2F5F2F;
+    --color-morado: #C586F0;
+    --color-crema: #F5EBDF;
     --color-carbon: #1F2922;
+    --color-verde-claro: #D3DAC3;
   }
 
   html {

@@ -2,15 +2,18 @@
 
 ## ¿Qué es AMEEC?
 
-La Asociación Mexicana de Educación Ecológica y Comunitaria (AMEEC) es una organización sin fines de lucro fundada en México. Su misión es promover la educación ecológica, la bioconstrucción y el desarrollo comunitario sostenible a través de talleres, proyectos territoriales y procesos de formación ciudadana.
+La Asociación Mexicana de Empresarios y Ejidos Cannábicos A.C. (AMEEC) es una asociación civil sin fines de lucro fundada en México. Su principal enfoque es investigar y promover el conocimiento sobre el cannabis (cáñamo medicinal e industrial) y sus diversos usos. Busca contribuir al desarrollo económico de comunidades rurales —especialmente ejidos, pueblos originarios y grupos vulnerables— mediante emprendimientos en economía circular.
 
 ## Proyectos principales
 
+### Investigación Cannábica
+AMEEC desarrolla investigación técnica, médica y financiera sobre el cannabis. Trabaja con ejidos y comunidades rurales para generar oportunidades de negocio en la industria del cáñamo, priorizando a mujeres, adultos mayores y comunidad LGBT+.
+
 ### Bioconstrucción
-Talleres prácticos de construcción con materiales naturales: tierra, cáñamo, bambú, adobe. Los talleres se realizan en distintos estados de México y combinan teoría y práctica. Son presenciales y tienen cuota de recuperación simbólica para cubrir materiales.
+Talleres prácticos de construcción con materiales naturales: tierra, cáñamo, bambú, adobe. Los talleres se realizan en distintos estados de México y combinan técnica ancestral con diseño contemporáneo. Tienen cuota simbólica para materiales.
 
 ### Olas de Amor
-Campaña y proyecto comunitario enfocado en la infancia y el vínculo con el entorno natural. Combina actividades de educación ambiental con trabajo en comunidades costeras.
+Proyecto comunitario enfocado en la infancia y el vínculo con el entorno natural. Combina actividades de educación comunitaria con trabajo en comunidades rurales y costeras.
 
 ## Proceso de inducción
 

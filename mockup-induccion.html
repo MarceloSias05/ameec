@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AMEEC — Boceto de Rediseño · Sitio de Inducción</title>
-  <meta name="description" content="Propuesta visual de rediseño del sitio de inducción AMEEC — Asociación Mexicana de Educación Ecológica y Comunitaria." />
+  <meta name="description" content="Propuesta visual de rediseño del sitio de inducción AMEEC — Asociación Mexicana de Empresarios y Ejidos Cannábicos A.C." />
 
   <!-- Tailwind CDN v3 + config personalizado -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -13,15 +13,21 @@
       theme: {
         extend: {
           colors: {
-            verde:  { 300:'#8FAB8F', 400:'#658765', 500:'#3F5E3F', 600:'#324B32', 700:'#263926' },
-            ocre:   { 200:'#E7B58F', 300:'#D89760', 400:'#C97B4A', 500:'#B26439', 600:'#8E4F2D' },
-            crema:  '#F4EFE6',
+            // Brand book: Verde Principal #2F5F2F
+            verde:  { 50:'#F0F5F0', 100:'#D4E4D4', 200:'#A8C8A8', 300:'#7EAB7E', 400:'#4D7B4D', 500:'#2F5F2F', 600:'#264C26', 700:'#1C381C', 800:'#122612', 900:'#091509' },
+            // Brand book: Morado Accent #C586F0
+            ocre:   { 50:'#FBF4FF', 100:'#F3E3FD', 200:'#E7C7FB', 300:'#D9A9F8', 400:'#C586F0', 500:'#AB64DB', 600:'#8C48C0', 700:'#6D35A0', 800:'#4E2278', 900:'#311054' },
+            // Brand book: Beige Suave #F5EBDF
+            crema:  '#F5EBDF',
+            // Brand book: Verde Claro #D3DAC3
+            'verde-claro': '#D3DAC3',
             carbon: '#1F2922',
-            olive:  '#4a5e3a',
+            olive:  '#3a5230',
           },
           fontFamily: {
-            display: ['Fraunces', 'Georgia', 'serif'],
-            sans:    ['Inter', 'system-ui', 'sans-serif'],
+            // Brand book: Figtree (primaria) + Plus Jakarta Sans (secundaria)
+            display: ['Figtree', 'system-ui', 'sans-serif'],
+            sans:    ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
           },
           boxShadow: {
             clay: '4px 4px 0 0 rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.15)',
@@ -32,17 +38,17 @@
     };
   </script>
 
-  <!-- Fuentes -->
+  <!-- Fuentes: Figtree + Plus Jakarta Sans (brand book oficial AMEEC 2026) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,700;9..144,0,800;9..144,1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
 
   <style>
-    /* Base */
-    body { font-family: 'Inter', system-ui, sans-serif; background: #F4EFE6; color: #1F2922; -webkit-font-smoothing: antialiased; }
-    h1, h2, h3, h4 { font-family: 'Fraunces', Georgia, serif; }
+    /* Base — Brand book: Plus Jakarta Sans body, Figtree headings */
+    body { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; background: #F5EBDF; color: #1F2922; -webkit-font-smoothing: antialiased; }
+    h1, h2, h3, h4 { font-family: 'Figtree', system-ui, sans-serif; }
 
-    /* Hero background: degradado que evoca campo abierto / naturaleza oscura */
+    /* Hero background */
     .hero-bg {
       background:
         linear-gradient(to bottom, rgba(0,0,0,.65) 0%, rgba(20,35,15,.45) 60%, rgba(0,0,0,.72) 100%),
@@ -60,8 +66,8 @@
     details[open] .faq-icon { transform: rotate(45deg); }
     .faq-icon { transition: transform 250ms ease; }
 
-    /* Selection */
-    ::selection { background: #C97B4A; color: #fff; }
+    /* Selection — morado accent */
+    ::selection { background: #C586F0; color: #fff; }
   </style>
 </head>
 

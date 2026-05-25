@@ -3,83 +3,402 @@ import Layout from '@layouts/Layout.astro';
 import Header from '@components/Header.astro';
 import Footer from '@components/Footer.astro';
 
-const temas = [
+const valores = [
   {
-    num: '01',
-    titulo: '¿Qué es AMEEC?',
-    desc: 'Historia, misión, visión y valores de la Asociación Mexicana de Educación Ecológica y Comunitaria. Conoce quiénes somos y hacia dónde vamos.',
-    recurso: null,
+    nombre: 'Honestidad',
+    desc: 'Respaldamos la integridad y credibilidad de la asociación al proporcionar información precisa y cumplir nuestros objetivos sociales.',
+    svg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="h-10 w-10"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1M4.22 4.22l.707.707M18.364 18.364l.707.707M3 12H2m20 0h-1M4.927 19.073l.707-.707M18.364 5.636l.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z"/></svg>`,
   },
   {
-    num: '02',
-    titulo: 'Legalidad',
-    desc: 'Marco legal de tu participación como prestador/a de servicio social. Convenios institucionales, carta de asignación y documentación requerida.',
-    recurso: null,
+    nombre: 'Responsabilidad',
+    desc: 'Compromiso inquebrantable con el progreso social, económico y científico de México, impulsando el bienestar de las comunidades rurales.',
+    svg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="h-10 w-10"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>`,
   },
   {
-    num: '03',
-    titulo: 'Responsabilidad Social',
-    desc: 'Compromisos éticos y comunitarios que asumes al integrarte a AMEEC. Código de conducta, confidencialidad y cuidado colectivo.',
-    recurso: null,
+    nombre: 'Respeto',
+    desc: 'Hacia las comunidades rurales, la planta del cannabis, la calidad de vida, y la promoción del conocimiento científico con dignidad.',
+    svg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="h-10 w-10"><path stroke-linecap="round" stroke-linejoin="round" d="M15.182 15.182a4.5 4.5 0 01-6.364 0M21 12a9 9 0 11-18 0 9 9 0 0118 0zM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75zm-.375 0h.008v.015h-.008V9.75zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75zm-.375 0h.008v.015h-.008V9.75z"/></svg>`,
+  },
+];
+
+const hitos = [
+  {
+    year: '2020',
+    label: 'Nacimiento',
+    desc: 'Acciones en Pandemia. Primeras ideas sobre la necesidad de apoyar al sector rural en la industria cannábica.',
   },
   {
-    num: '04',
-    titulo: 'Investigación',
-    desc: 'Líneas de investigación activas en AMEEC. Cómo tu trabajo puede contribuir al conocimiento sobre educación ecológica y bioconstrucción.',
-    recurso: null,
+    year: '2021',
+    label: 'Formalización',
+    desc: 'AMEEC se constituye formalmente en mayo. Rueda de prensa en Tepic, Nayarit. Primer extensionismo rural cannábico en Coastecomate, San Pedro Lagunillas. Encuentros con líderes ejidatarios y presentación ante autoridades.',
+  },
+  {
+    year: '2022–2023',
+    label: 'Desarrollo y Proyectos',
+    desc: 'Vinculación institucional con universidades. Semana Tec Campus Santa Fe. Firma de convenio con UACH (Universidad Autónoma Chapingo). Bioconstrucción en la Sierra. Proyecto Olas de Amor. Ganadores del Premio Nacional de Arte Popular 2023.',
+  },
+  {
+    year: '2024',
+    label: 'Consolidación',
+    desc: 'Agenda verde del Cáñamo Industrial en México. Reunión con aliados en CDMX. Limpieza en Isla del Rey, San Blas Nayarit. Presentaciones en Tec de Monterrey Campus Santa Fe y Ciudad de México.',
+  },
+  {
+    year: '2025',
+    label: 'Hoy',
+    desc: 'Programa "Sumando Talento" activo en múltiples universidades. Expansión de convenios institucionales y proyectos comunitarios en curso.',
   },
 ];
 ---
 
 <Layout
-  title="Módulo Inducción — AMEEC"
-  description="Guía de inducción al Servicio Social en AMEEC: misión, legalidad, responsabilidad social e investigación."
+  title="Módulo 1: Inducción — AMEEC"
+  description="Conoce qué es AMEEC, su misión, visión, valores e historia. Módulo de inducción para prestadores de servicio social."
 >
   <Header />
   <main id="main">
+
+    <!-- ── HERO ─────────────────────────────────────────────── -->
     <section class="bg-verde-500 py-16 text-white">
       <div class="container-narrow">
         <a href="/#pasos" class="mb-6 inline-flex items-center gap-2 text-sm text-white/70 hover:text-white transition-colors">
-          <svg viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4"><path fill-rule="evenodd" d="M17 10a.75.75 0 01-.75.75H5.612l4.158 3.96a.75.75 0 11-1.04 1.08l-5.5-5.25a.75.75 0 010-1.08l5.5-5.25a.75.75 0 111.04 1.08L5.612 9.25H16.25A.75.75 0 0117 10z" clip-rule="evenodd"/></svg>
+          <svg viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4" aria-hidden="true">
+            <path fill-rule="evenodd" d="M17 10a.75.75 0 01-.75.75H5.612l4.158 3.96a.75.75 0 11-1.04 1.08l-5.5-5.25a.75.75 0 010-1.08l5.5-5.25a.75.75 0 111.04 1.08L5.612 9.25H16.25A.75.75 0 0117 10z" clip-rule="evenodd"/>
+          </svg>
           Volver a los módulos
         </a>
-        <p class="eyebrow mb-3 text-ocre-200">Módulo 1</p>
+        <p class="eyebrow mb-3 text-ocre-300">Módulo 1</p>
         <h1 class="font-display text-5xl font-bold md:text-6xl">Inducción</h1>
-        <p class="mt-4 max-w-xl text-white/80 leading-relaxed">Todo lo que necesitas saber para entender dónde estás, qué puedes hacer y cómo tu participación impacta a la comunidad.</p>
+        <p class="mt-4 max-w-2xl text-white/80 leading-relaxed">
+          Todo lo que necesitas saber sobre AMEEC: qué somos, por qué existimos, nuestra misión, historia y cómo tu participación impacta a las comunidades.
+        </p>
       </div>
     </section>
 
-    <section class="container-narrow py-16 md:py-20">
-      <div class="grid gap-6 md:grid-cols-2">
-        {temas.map((tema) => (
-          <div data-reveal class="rounded-2xl border border-carbon/8 bg-white p-8 shadow-sm hover:shadow-md transition-shadow">
-            <span class="font-display text-4xl font-bold text-ocre-400">{tema.num}</span>
-            <h2 class="mt-4 mb-3 font-display text-2xl font-semibold text-verde-500">{tema.titulo}</h2>
-            <p class="text-sm leading-relaxed text-carbon/70">{tema.desc}</p>
-            {tema.recurso && (
-              <a href={tema.recurso} class="mt-4 inline-flex items-center gap-1 text-sm font-medium text-verde-500 hover:text-ocre-400 transition-colors">
-                Ver recurso →
-              </a>
-            )}
-            {!tema.recurso && (
-              <p class="mt-4 text-xs text-carbon/40 italic">Contenido próximamente — consulta con tu coordinador/a</p>
-            )}
+    <!-- ── CANNABIS SATIVA L / MARIHUANA VS CÁÑAMO ─────────── -->
+    <section class="py-16 md:py-24" style="background-color: #2F5F2F;">
+      <div class="container-narrow">
+        <div class="mb-12 text-center text-white">
+          <p class="eyebrow mb-2 text-ocre-300">Ciencia básica</p>
+          <h2 class="font-display text-5xl font-extrabold md:text-7xl">CANNABIS SATIVA L</h2>
+          <p class="mt-2 text-xl text-white/70 tracking-widest uppercase">Nombre Científico de la Planta</p>
+        </div>
+
+        <!-- Tres tipos -->
+        <div class="grid gap-4 md:grid-cols-[1fr_1fr_1fr]">
+          <!-- Marihuana -->
+          <div data-reveal class="relative overflow-hidden rounded-3xl" style="min-height: 280px; background: linear-gradient(135deg, #1a3a1a 0%, #2d5a2d 100%);">
+            <div class="absolute inset-0 flex flex-col items-center justify-center p-6 text-white text-center">
+              <span class="mb-3 rounded-full border border-red-400/60 px-4 py-1 text-xs font-semibold uppercase tracking-widest text-red-300">Cannabis Psicoactiva</span>
+              <p class="font-display text-3xl font-bold">Marihuana</p>
+              <div class="mt-4 rounded-2xl bg-white/10 px-6 py-3">
+                <p class="text-sm font-medium text-white/70">THC</p>
+                <p class="font-display text-2xl font-bold text-red-300">Mayor a 1%</p>
+              </div>
+            </div>
           </div>
-        ))}
+
+          <!-- Cáñamo Industrial -->
+          <div data-reveal data-reveal-delay="100" class="relative overflow-hidden rounded-3xl" style="min-height: 280px; background: linear-gradient(135deg, #1e3d1e 0%, #3a6b3a 100%);">
+            <div class="absolute inset-0 flex flex-col items-center justify-center p-6 text-white text-center">
+              <span class="mb-3 rounded-full border border-verde-claro/60 px-4 py-1 text-xs font-semibold uppercase tracking-widest" style="color: #D3DAC3; border-color: #D3DAC3;">Cannabis no psicoactiva</span>
+              <p class="font-display text-3xl font-bold">Cáñamo Industrial</p>
+              <div class="mt-4 rounded-2xl bg-white/10 px-6 py-3">
+                <p class="text-sm font-medium text-white/70">THC</p>
+                <p class="font-display text-2xl font-bold" style="color: #D3DAC3;">menor 1%</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cáñamo Medicinal -->
+          <div data-reveal data-reveal-delay="200" class="relative overflow-hidden rounded-3xl" style="min-height: 280px; background: linear-gradient(135deg, #2a3d1e 0%, #4a6b2a 100%);">
+            <div class="absolute inset-0 flex flex-col items-center justify-center p-6 text-white text-center">
+              <span class="mb-3 rounded-full border border-ocre-300/60 px-4 py-1 text-xs font-semibold uppercase tracking-widest text-ocre-200">Cannabis no psicoactiva</span>
+              <p class="font-display text-3xl font-bold">Cáñamo Medicinal</p>
+              <div class="mt-4 rounded-2xl bg-white/10 px-6 py-3">
+                <p class="text-sm font-medium text-white/70">THC</p>
+                <p class="font-display text-2xl font-bold text-ocre-200">menor 1%</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p class="mt-8 text-center text-sm text-white/50">
+          AMEEC trabaja exclusivamente con <strong class="text-white/80">cáñamo industrial y medicinal</strong> — variedades no psicoactivas con THC menor al 1%.
+        </p>
       </div>
     </section>
 
+    <!-- ── ¿QUÉ ES AMEEC? ──────────────────────────────────── -->
+    <section class="bg-carbon py-16 md:py-24 text-white">
+      <div class="container-narrow">
+        <div class="mb-12 text-center">
+          <p class="eyebrow mb-3 text-ocre-300">Conócenos</p>
+          <h2 class="font-display text-5xl font-bold md:text-6xl">¿Qué es AMEEC?</h2>
+        </div>
+
+        <div class="grid gap-8 md:grid-cols-2 items-start">
+          <div data-reveal class="rounded-3xl bg-white/5 border border-white/10 p-8">
+            <p class="text-lg leading-relaxed text-white/80">
+              La <strong class="text-white">Asociación Mexicana de Empresarios y Ejidos Cannábicos A.C.</strong> es una asociación civil sin fines de lucro fundada en México cuyo principal enfoque es investigar y promover el conocimiento sobre el cannabis —cáñamo medicinal e industrial— y sus diversos usos.
+            </p>
+            <p class="mt-4 text-lg leading-relaxed text-white/80">
+              Nuestro objeto social es contribuir al desarrollo económico de las comunidades rurales más alejadas de las zonas urbanas, mediante la creación de emprendimientos en economía circular que resulten en el empoderamiento de las zonas rurales.
+            </p>
+          </div>
+
+          <div data-reveal data-reveal-delay="120" class="space-y-4">
+            <div class="rounded-2xl bg-verde-500/30 border border-verde-400/30 p-5">
+              <p class="text-sm font-semibold uppercase tracking-wider text-ocre-300 mb-2">Enfoque principal</p>
+              <p class="text-white/80">Investigación técnica, médica y financiera del cannabis para generar oportunidades de negocio en la industria del cáñamo en México.</p>
+            </div>
+            <div class="rounded-2xl bg-verde-500/30 border border-verde-400/30 p-5">
+              <p class="text-sm font-semibold uppercase tracking-wider text-ocre-300 mb-2">Población prioritaria</p>
+              <p class="text-white/80">Ejidos, pueblos originarios, mujeres que sufren violencia, niñez en escasez, adultos mayores y comunidad LGBT+.</p>
+            </div>
+            <div class="rounded-2xl bg-verde-500/30 border border-verde-400/30 p-5">
+              <p class="text-sm font-semibold uppercase tracking-wider text-ocre-300 mb-2">Domicilio</p>
+              <p class="text-white/80">Construcción 795, Col. Santa Teresita, C.P. 63020, Tepic, Nayarit.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── MISIÓN ──────────────────────────────────────────── -->
+    <section class="bg-carbon py-16 md:py-20 text-white border-t border-white/5">
+      <div class="container-narrow">
+        <div class="grid gap-12 md:grid-cols-[auto_1fr] items-start">
+          <div class="flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl bg-verde-500/20 border border-verde-400/30">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="h-10 w-10 text-ocre-300" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"/>
+            </svg>
+          </div>
+          <div data-reveal>
+            <h2 class="font-display text-4xl font-bold mb-6">Misión</h2>
+            <p class="text-lg leading-relaxed text-white/80">
+              Desarrollar investigación técnica, médica y financiera del cannabis, así como contribuir a erradicar la desigualdad económica en los estados menos favorecidos que existen en México a través de acciones y estrategias que generen mejores oportunidades de negocios en la industria del cannabis, priorizando a ejidos, pueblos originarios y grupos vulnerables, como lo son; mujeres que sufren violencia, niñez en escasez, adultos mayores y la comunidad LGBT+ con intención de que accedan a una calidad de vida digna.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── VISIÓN ──────────────────────────────────────────── -->
+    <section class="bg-carbon py-16 md:py-20 text-white border-t border-white/5">
+      <div class="container-narrow">
+        <div class="grid gap-12 md:grid-cols-[auto_1fr] items-start">
+          <div class="flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl bg-ocre-400/20 border border-ocre-400/30">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="h-10 w-10 text-ocre-300" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+            </svg>
+          </div>
+          <div data-reveal>
+            <h2 class="font-display text-4xl font-bold mb-6">Visión</h2>
+            <p class="text-lg leading-relaxed text-white/80">
+              Ser una asociación civil que defienda, promueva y ayude al desarrollo económico de las zonas rurales del país, dentro y desde una perspectiva humanista y respetuosa del medio ambiente.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── VALORES ─────────────────────────────────────────── -->
+    <section class="bg-carbon py-16 md:py-20 text-white border-t border-white/5">
+      <div class="container-narrow">
+        <div class="mb-12 text-center">
+          <h2 class="font-display text-4xl font-bold">Valores</h2>
+        </div>
+        <div class="grid gap-6 md:grid-cols-3">
+          {valores.map((v, i) => (
+            <div data-reveal data-reveal-delay={String(i * 100)} class="rounded-3xl border border-white/10 bg-white/5 p-8 text-center hover:border-ocre-400/40 transition-colors">
+              <div class="mb-5 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-verde-500/20 text-ocre-300" set:html={v.svg} />
+              <h3 class="mb-3 font-display text-2xl font-bold">{v.nombre}</h3>
+              <p class="text-sm leading-relaxed text-white/60">{v.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ── ¿POR QUÉ SE FUNDA AMEEC? ─────────────────────────── -->
+    <section class="py-16 md:py-24" style="background-color: #2F5F2F;">
+      <div class="container-narrow">
+        <div class="mb-12 text-white">
+          <p class="eyebrow mb-3 text-ocre-300">Origen</p>
+          <h2 class="font-display text-5xl font-bold md:text-6xl">¿Por qué se funda<br/>AMEEC?</h2>
+        </div>
+
+        <!-- Evolución del logo -->
+        <div class="mb-12 grid grid-cols-3 gap-4">
+          {[
+            { year: '2021', label: 'Primer logo' },
+            { year: '2022, 2023', label: 'Segunda identidad' },
+            { year: '2024', label: 'Identidad actual' },
+          ].map((item, i) => (
+            <div data-reveal data-reveal-delay={String(i * 80)} class="rounded-2xl bg-white/10 border border-white/20 p-6 text-center text-white">
+              <div class="mb-3 text-3xl font-bold font-display text-ocre-300">A.</div>
+              <p class="text-sm font-semibold">{item.year}</p>
+              <p class="text-xs text-white/50 mt-1">{item.label}</p>
+            </div>
+          ))}
+        </div>
+
+        <!-- Texto de fundación -->
+        <div class="rounded-3xl bg-carbon p-8 md:p-10 text-white space-y-5">
+          <p class="text-base leading-relaxed text-white/80">
+            AMEEC nace a raíz de la pronta legalización del cannabis en México y de la clara desventaja que tienen los nuevos emprendedores y el sector rural por las reglas de operación emitidas por el ejecutivo en comparación con las empresas o personas que tienen grandes capitales para desarrollar un negocio a gran escala que se les facilitaran los procesos ya que con su capital pueden cumplir con los requisitos establecidos por las leyes mexicanas.
+          </p>
+          <p class="text-base leading-relaxed text-white/80">
+            Lo anterior se apoyará para que ingresen a la industria bajo los requisitos expuestos por parte del ejecutivo federal descritos en la <em>"Ley General De Salud en Materia de Control Sanitario para la producción, Investigación, y Uso Medicinal de la Cannabis y sus Derivados Farmacológicos"</em> publicado el 12 de enero del 2021 en el Diario Oficial de la Federación y/o cualquier reglamento emitido en fechas futuras.
+          </p>
+          <p class="text-base leading-relaxed text-white/80">
+            Es fundada por personas con experiencia en diferentes sectores, logrando un enfoque que marca la diferencia. Nuestro trabajo y compromiso continúa gracias a los donadores, asesores, voluntarios, practicantes y empleados que disponen de su tiempo y esfuerzo para lograr los objetivos ya planteados.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── LEGALIDAD ───────────────────────────────────────── -->
+    <section class="bg-carbon py-16 md:py-20 text-white">
+      <div class="container-narrow">
+        <div class="mb-10">
+          <p class="eyebrow mb-3 text-ocre-300">Marco legal</p>
+          <h2 class="font-display text-5xl font-bold">Legalidad</h2>
+          <p class="mt-4 max-w-xl text-white/70 leading-relaxed">
+            El marco legal que regula tu participación como prestador/a de servicio social en AMEEC y las actividades de la asociación.
+          </p>
+        </div>
+
+        <div class="grid gap-6 md:grid-cols-2">
+          <div data-reveal class="rounded-3xl bg-white/5 border border-white/10 p-8">
+            <h3 class="mb-4 font-display text-2xl font-bold text-ocre-300">Mensaje del Presidente</h3>
+            <p class="text-sm leading-relaxed text-white/70">
+              "Personalmente, siempre he imaginado un México más justo y con igualdad de oportunidades para todos. Mi experiencia en el sector privado, así como el emprendimiento que he desarrollado desde muy joven y hasta la fecha, me ha ayudado a crecer profesional y personalmente con cada reto adquirido. El camino del emprendedor no es fácil pero definitivamente es un rol que acepté realizar, porque entendí que eso es mi pasión y trabajo para ello cada día."
+            </p>
+          </div>
+
+          <div data-reveal data-reveal-delay="100" class="rounded-3xl bg-verde-500/20 border border-verde-400/30 p-8">
+            <h3 class="mb-4 font-display text-2xl font-bold">Convenio institucional</h3>
+            <p class="mb-4 text-sm leading-relaxed text-white/70">
+              Tu participación está respaldada por un convenio entre tu institución educativa y AMEEC, en conformidad con la Ley General de Salud en Materia de Control Sanitario del Cannabis.
+            </p>
+            <a
+              href="mailto:hola@ameec.org?subject=Solicitud presentación completa legalidad AMEEC"
+              class="inline-flex items-center gap-2 rounded-full bg-verde-500 px-6 py-3 text-sm font-medium text-white hover:bg-ocre-400 transition-colors"
+            >
+              Ver presentación completa
+              <svg viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4" aria-hidden="true">
+                <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/>
+                <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── RESPONSABILIDAD SOCIAL ──────────────────────────── -->
+    <section class="bg-carbon py-16 md:py-20 text-white border-t border-white/5">
+      <div class="container-narrow">
+        <div class="grid gap-8 md:grid-cols-2 items-center">
+          <div data-reveal>
+            <p class="eyebrow mb-3 text-ocre-300">Compromiso comunitario</p>
+            <h2 class="font-display text-4xl font-bold mb-4">Responsabilidad Social</h2>
+            <p class="text-white/70 leading-relaxed mb-6">
+              Al integrarte a AMEEC aceptas un código de conducta que protege a las comunidades con las que trabajamos. La confidencialidad, el respeto y el cuidado colectivo son pilares de nuestra operación.
+            </p>
+            <a href="/modulos/derechos" class="inline-flex items-center gap-2 rounded-full border border-white/30 px-6 py-3 text-sm font-medium text-white hover:border-white transition-colors">
+              Ver derechos y obligaciones
+              <svg viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4" aria-hidden="true">
+                <path fill-rule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clip-rule="evenodd"/>
+              </svg>
+            </a>
+          </div>
+          <div data-reveal data-reveal-delay="100" class="grid grid-cols-2 gap-3">
+            {['Confidencialidad', 'Puntualidad', 'Comunicación activa', 'Cuidado colectivo'].map((item) => (
+              <div class="rounded-2xl bg-white/5 border border-white/10 p-4 text-sm font-medium text-white/80">
+                <span class="mr-2 text-ocre-300">→</span>{item}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── INVESTIGACIÓN ────────────────────────────────────── -->
+    <section class="bg-carbon py-16 md:py-20 text-white border-t border-white/5">
+      <div class="container-narrow">
+        <div class="grid gap-8 md:grid-cols-2 items-center">
+          <div data-reveal data-reveal-delay="100" class="order-2 md:order-1 grid gap-3">
+            {[
+              { area: 'Investigación técnica', desc: 'Cultivo, procesamiento y usos industriales del cáñamo' },
+              { area: 'Investigación médica', desc: 'Aplicaciones terapéuticas y farmacológicas del cannabis' },
+              { area: 'Investigación financiera', desc: 'Modelos de negocio viables para ejidos y comunidades rurales' },
+              { area: 'Extensionismo rural', desc: 'Transferencia de conocimiento a comunidades en campo' },
+            ].map((item) => (
+              <div class="rounded-2xl bg-white/5 border border-white/10 p-4">
+                <p class="text-sm font-semibold text-ocre-300 mb-1">{item.area}</p>
+                <p class="text-xs text-white/60">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+          <div data-reveal class="order-1 md:order-2">
+            <p class="eyebrow mb-3 text-ocre-300">Ciencia aplicada</p>
+            <h2 class="font-display text-4xl font-bold mb-4">Investigación</h2>
+            <p class="text-white/70 leading-relaxed mb-6">
+              AMEEC desarrolla líneas activas de investigación sobre el cannabis medicinal e industrial. Tu trabajo como prestador/a de servicio social puede contribuir directamente al conocimiento científico y al desarrollo económico comunitario.
+            </p>
+            <a href="mailto:hola@ameec.org?subject=Quiero contribuir en investigación AMEEC" class="inline-flex items-center gap-2 rounded-full border border-white/30 px-6 py-3 text-sm font-medium text-white hover:border-white transition-colors">
+              Contribuir en investigación
+              <svg viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4" aria-hidden="true">
+                <path fill-rule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clip-rule="evenodd"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── TIMELINE DE HISTORIA ────────────────────────────── -->
+    <section class="py-16 md:py-24" style="background-color: #2F5F2F;">
+      <div class="container-narrow">
+        <div class="mb-12 text-white">
+          <p class="eyebrow mb-3 text-ocre-300">Cronología</p>
+          <h2 class="font-display text-5xl font-bold">Antecedentes</h2>
+          <p class="mt-3 text-white/70">2020 – 2025</p>
+        </div>
+
+        <div class="relative pl-6 md:pl-8 border-l-2 border-white/20 space-y-10">
+          {hitos.map((h, i) => (
+            <div data-reveal data-reveal-delay={String(i * 80)} class="relative">
+              <div class="absolute -left-[calc(1.5rem+1px)] md:-left-[calc(2rem+1px)] top-1 h-4 w-4 rounded-full border-2 border-ocre-400 bg-verde-500" />
+              <div class="rounded-3xl bg-white/10 border border-white/20 p-6 md:p-8 ml-4">
+                <div class="mb-3 flex flex-wrap items-center gap-3">
+                  <span class="font-display text-2xl font-bold text-ocre-300">{h.year}</span>
+                  <span class="rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-white/70">{h.label}</span>
+                </div>
+                <p class="text-sm leading-relaxed text-white/70">{h.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CTA FINAL ───────────────────────────────────────── -->
     <section class="bg-crema py-12">
       <div class="container-narrow flex flex-col items-center gap-4 text-center sm:flex-row sm:justify-between sm:text-left">
         <div>
           <p class="font-semibold text-carbon">¿Tienes dudas sobre este módulo?</p>
           <p class="text-sm text-carbon/60">Tu coordinador/a puede orientarte o escríbenos directamente.</p>
         </div>
-        <a href="mailto:hola@ameec.org?subject=Duda módulo Inducción" class="btn-primary whitespace-nowrap">
+        <a href="mailto:hola@ameec.org?subject=Duda módulo Inducción AMEEC" class="btn-primary whitespace-nowrap">
           Preguntar por correo
         </a>
       </div>
     </section>
+
   </main>
   <Footer />
 </Layout>

@@ -4,36 +4,42 @@ export default {
   theme: {
     extend: {
       colors: {
+        // Brand book: Verde Principal #2F5F2F
         verde: {
-          50: '#F2F5F2',
-          100: '#DDE5DD',
-          200: '#B8C8B8',
-          300: '#8FAB8F',
-          400: '#658765',
-          500: '#3F5E3F',
-          600: '#324B32',
-          700: '#263926',
-          800: '#1A271A',
-          900: '#0F170F',
+          50: '#F0F5F0',
+          100: '#D4E4D4',
+          200: '#A8C8A8',
+          300: '#7EAB7E',
+          400: '#4D7B4D',
+          500: '#2F5F2F',
+          600: '#264C26',
+          700: '#1C381C',
+          800: '#122612',
+          900: '#091509',
         },
+        // Brand book: Verde Claro #D3DAC3
+        'verde-claro': '#D3DAC3',
+        // Brand book: Morado Accent #C586F0 — mapped to "ocre" key to avoid touching all component files
         ocre: {
-          50: '#FBF2EB',
-          100: '#F4DCC8',
-          200: '#E7B58F',
-          300: '#D89760',
-          400: '#C97B4A',
-          500: '#B26439',
-          600: '#8E4F2D',
-          700: '#6A3A21',
-          800: '#472716',
-          900: '#26140A',
+          50: '#FBF4FF',
+          100: '#F3E3FD',
+          200: '#E7C7FB',
+          300: '#D9A9F8',
+          400: '#C586F0',
+          500: '#AB64DB',
+          600: '#8C48C0',
+          700: '#6D35A0',
+          800: '#4E2278',
+          900: '#311054',
         },
-        crema: '#F4EFE6',
+        // Brand book: Beige Suave #F5EBDF
+        crema: '#F5EBDF',
         carbon: '#1F2922',
       },
       fontFamily: {
-        display: ['Fraunces', 'Georgia', 'serif'],
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        // Brand book: Figtree (primaria) + Plus Jakarta Sans (secundaria)
+        display: ['Figtree', 'system-ui', 'sans-serif'],
+        sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
       },
       maxWidth: {
         prose: '70ch',
