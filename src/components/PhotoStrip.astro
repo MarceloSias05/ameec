@@ -40,8 +40,12 @@ const photos = [
 
     <div class="grid gap-4 md:grid-cols-3">
       {
-        photos.map((photo) => (
-          <figure class="group overflow-hidden rounded-3xl bg-white shadow-sm">
+        photos.map((photo, i) => (
+          <figure
+            data-reveal
+            data-reveal-delay={String(i * 120)}
+            class="group overflow-hidden rounded-3xl bg-white shadow-sm"
+          >
             <Image
               src={photo.src}
               alt={photo.alt}

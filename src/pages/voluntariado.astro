@@ -1,0 +1,74 @@
+---
+import Layout from '@layouts/Layout.astro';
+import Header from '@components/Header.astro';
+import Footer from '@components/Footer.astro';
+
+const perfiles = [
+  {
+    icono: '🌱',
+    titulo: 'Facilitador/a de talleres',
+    desc: 'Personas con experiencia en bioconstrucción, agroecología o educación popular. Facilitamos los materiales y la logística.',
+  },
+  {
+    icono: '💻',
+    titulo: 'Apoyo digital y comunicación',
+    desc: 'Diseño, redes sociales, documentación audiovisual, desarrollo web. Tu oficio al servicio del ecosistema.',
+  },
+  {
+    icono: '🗂️',
+    titulo: 'Gestión y coordinación',
+    desc: 'Ayuda con administración, contacto con comunidades, seguimiento a participantes y organización de eventos.',
+  },
+  {
+    icono: '🤝',
+    titulo: 'Mentoría a nuevas personas',
+    desc: 'Si llevas tiempo en AMEEC, puedes acompañar a quienes recién llegan en sus primeras semanas.',
+  },
+];
+---
+
+<Layout
+  title="Voluntariado — AMEEC"
+  description="Suma tu tiempo, experiencia y energía a los proyectos de educación ecológica y bioconstrucción comunitaria de AMEEC."
+>
+  <Header />
+  <main id="main">
+    <section class="container-narrow py-20 md:py-28">
+      <div class="max-w-2xl mb-16">
+        <p class="eyebrow mb-4">Voluntariado</p>
+        <h1 class="font-display text-5xl md:text-6xl font-bold text-verde-500 leading-tight mb-6">
+          Suma lo que sabes hacer
+        </h1>
+        <p class="text-xl text-carbon/75 leading-relaxed">
+          En AMEEC no buscamos "voluntarios genéricos". Buscamos personas con ganas de aportar desde lo que ya son — con sus habilidades, su tiempo y su energía.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6 mb-16">
+        {perfiles.map((p) => (
+          <div data-reveal class="bg-white rounded-2xl p-7 border border-carbon/5 shadow-sm hover:shadow-md transition-shadow">
+            <span class="text-3xl mb-4 block">{p.icono}</span>
+            <h2 class="font-display text-xl font-semibold text-verde-500 mb-2">{p.titulo}</h2>
+            <p class="text-sm text-carbon/70 leading-relaxed">{p.desc}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="bg-verde-500 rounded-3xl p-10 md:p-14 text-white text-center max-w-3xl mx-auto">
+        <h2 class="font-display text-3xl font-bold mb-4">¿Listo para sumarte?</h2>
+        <p class="text-white/80 leading-relaxed mb-8">
+          El primer paso es el mismo que para cualquier participante: la sesión de inducción. Ahí conoces los proyectos activos y encuentras dónde encaja mejor tu aportación.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="/#inscribete" class="bg-white text-verde-500 px-7 py-3.5 rounded-full font-medium hover:bg-crema transition-colors">
+            Iniciar inducción
+          </a>
+          <a href="mailto:hola@ameec.org?subject=Quiero ser voluntario en AMEEC" class="border-2 border-white/40 text-white px-7 py-3.5 rounded-full font-medium hover:border-white transition-colors">
+            Escribirnos directamente
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

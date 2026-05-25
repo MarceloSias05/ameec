@@ -65,16 +65,26 @@ Duración etapa inicial: ~4 semanas, 2–4 horas/semana.
 - Si la pregunta no está relacionada con AMEEC, declínala amablemente y ofrece orientar sobre la organización.
 - Cuando alguien esté listo para inscribirse, dirígelo a la sección de inscripción de esta misma página.`;
 
-const CORS_HEADERS = {
-  'Access-Control-Allow-Origin': 'https://induccion.ameec.org',
-  'Access-Control-Allow-Methods': 'POST, OPTIONS',
-  'Access-Control-Allow-Headers': 'Content-Type',
-};
+const ALLOWED_ORIGINS = new Set([
+  'https://induccion.ameec.org',
+  'http://localhost:4321',
+  'http://127.0.0.1:4321',
+]);
+
+function getCorsHeaders(origin: string | null): Record<string, string> {
+  const allowed = origin && ALLOWED_ORIGINS.has(origin) ? origin : 'https://induccion.ameec.org';
+  return {
+    'Access-Control-Allow-Origin': allowed,
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type',
+    'Vary': 'Origin',
+  };
+}
 
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     if (request.method === 'OPTIONS') {
-      return new Response(null, { headers: CORS_HEADERS });
+      return new Response(null, { headers: getCorsHeaders(request.headers.get('Origin')) });
     }
 
     if (request.method !== 'POST') {
@@ -87,7 +97,7 @@ export default {
     } catch {
       return new Response(JSON.stringify({ error: 'JSON inválido' }), {
         status: 400,
-        headers: { 'Content-Type': 'application/json', ...CORS_HEADERS },
+        headers: { 'Content-Type': 'application/json', ...getCorsHeaders(request.headers.get('Origin')) },
       });
     }
 
@@ -95,7 +105,7 @@ export default {
     if (!Array.isArray(messages) || messages.length === 0) {
       return new Response(JSON.stringify({ error: 'messages requerido' }), {
         status: 400,
-        headers: { 'Content-Type': 'application/json', ...CORS_HEADERS },
+        headers: { 'Content-Type': 'application/json', ...getCorsHeaders(request.headers.get('Origin')) },
       });
     }
 
@@ -132,7 +142,7 @@ export default {
         JSON.stringify({ error: 'Error al consultar el asistente. Intenta de nuevo.' }),
         {
           status: 502,
-          headers: { 'Content-Type': 'application/json', ...CORS_HEADERS },
+          headers: { 'Content-Type': 'application/json', ...getCorsHeaders(request.headers.get('Origin')) },
         }
       );
     }
@@ -141,7 +151,7 @@ export default {
     const reply = data.content?.[0]?.text ?? 'No pude generar una respuesta. Escríbenos a hola@ameec.org.';
 
     return new Response(JSON.stringify({ reply }), {
-      headers: { 'Content-Type': 'application/json', ...CORS_HEADERS },
+      headers: { 'Content-Type': 'application/json', ...getCorsHeaders(request.headers.get('Origin')) },
     });
   },
 };

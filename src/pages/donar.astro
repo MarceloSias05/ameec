@@ -1,0 +1,69 @@
+---
+import Layout from '@layouts/Layout.astro';
+import Header from '@components/Header.astro';
+import Footer from '@components/Footer.astro';
+---
+
+<Layout
+  title="Donar a AMEEC — Apoya la educación ecológica comunitaria"
+  description="Tu aportación hace posible los talleres, proyectos territoriales y procesos de formación de AMEEC."
+>
+  <Header />
+  <main id="main">
+    <section class="container-narrow py-20 md:py-28 grid md:grid-cols-2 gap-16 items-start">
+      <div>
+        <p class="eyebrow mb-4">Apóyanos</p>
+        <h1 class="font-display text-5xl md:text-6xl font-bold text-verde-500 leading-tight mb-6">
+          Tu aportación siembra comunidad
+        </h1>
+        <p class="text-lg text-carbon/75 leading-relaxed mb-6">
+          AMEEC opera con recursos limitados y voluntad grande. Cada donación cubre materiales para talleres de bioconstrucción, transporte a comunidades rurales y acceso gratuito a la formación para quienes no pueden costear una cuota.
+        </p>
+        <ul class="space-y-4 text-sm text-carbon/70 leading-relaxed">
+          <li class="flex gap-3">
+            <span class="mt-0.5 h-5 w-5 shrink-0 rounded-full bg-ocre-400/20 flex items-center justify-center text-ocre-400 font-bold text-xs">✓</span>
+            <span><strong class="text-carbon">$200 MXN</strong> cubre materiales para un participante en taller de bioconstrucción.</span>
+          </li>
+          <li class="flex gap-3">
+            <span class="mt-0.5 h-5 w-5 shrink-0 rounded-full bg-ocre-400/20 flex items-center justify-center text-ocre-400 font-bold text-xs">✓</span>
+            <span><strong class="text-carbon">$500 MXN</strong> financia el traslado de un facilitador a comunidad rural.</span>
+          </li>
+          <li class="flex gap-3">
+            <span class="mt-0.5 h-5 w-5 shrink-0 rounded-full bg-ocre-400/20 flex items-center justify-center text-ocre-400 font-bold text-xs">✓</span>
+            <span><strong class="text-carbon">$1,000 MXN</strong> sostiene una sesión completa de inducción para 10 personas.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="bg-white rounded-3xl p-8 shadow-sm border border-carbon/5">
+        <p class="font-display text-2xl font-semibold text-verde-500 mb-2">¿Cómo donar?</p>
+        <p class="text-sm text-carbon/65 leading-relaxed mb-6">
+          Por ahora gestionamos las donaciones directamente para que el 100% llegue a los proyectos sin intermediarios.
+        </p>
+
+        <div class="space-y-4 text-sm">
+          <div class="rounded-2xl bg-crema p-5">
+            <p class="font-semibold text-carbon mb-1">Transferencia bancaria</p>
+            <p class="text-carbon/65">Escríbenos a <a href="mailto:hola@ameec.org" class="text-verde-500 underline underline-offset-2">hola@ameec.org</a> para recibir los datos de cuenta.</p>
+          </div>
+          <div class="rounded-2xl bg-crema p-5">
+            <p class="font-semibold text-carbon mb-1">Donación en especie</p>
+            <p class="text-carbon/65">Materiales de construcción, herramientas, libros o equipo de cómputo. Contáctanos para coordinar.</p>
+          </div>
+          <div class="rounded-2xl bg-crema p-5">
+            <p class="font-semibold text-carbon mb-1">¿Eres empresa o fundación?</p>
+            <p class="text-carbon/65">Podemos emitir carta de agradecimiento y documentación del impacto. Hablemos.</p>
+          </div>
+        </div>
+
+        <a
+          href="mailto:hola@ameec.org?subject=Quiero donar a AMEEC"
+          class="btn-primary w-full text-center mt-6"
+        >
+          Escribir a hola@ameec.org
+        </a>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

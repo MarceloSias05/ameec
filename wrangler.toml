@@ -4,8 +4,8 @@ compatibility_date = "2024-09-23"
 compatibility_flags = ["nodejs_compat"]
 
 [vars]
-# Las variables sensibles se definen en el dashboard de Cloudflare, no aquí
-# wrangler secret put CLAUDE_API_KEY
+# Variables sensibles: definir con `wrangler secret put CLAUDE_API_KEY`
+# NO poner valores reales aquí
 
 [[routes]]
 pattern = "induccion.ameec.org/api/chat"

@@ -17,8 +17,9 @@ const preguntas = faqData.items;
       {
         preguntas.map((item, i) => (
           <div
+            data-reveal
+            data-reveal-delay={String(i * 80)}
             class="group overflow-hidden rounded-2xl border border-carbon/10 bg-crema"
-            x-data="{ open: false }"
           >
             <dt>
               <button

@@ -10,7 +10,13 @@ const induccion = defineCollection({
   schema: z.any(),
 });
 
+const kb = defineCollection({
+  type: 'content',
+  schema: z.object({}).passthrough(),
+});
+
 export const collections = {
   config,
   induccion,
+  kb,
 };
