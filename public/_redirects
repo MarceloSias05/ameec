@@ -1,0 +1,8 @@
+# Redirige ameec.net/* hacia el nuevo dominio (agregar en Cloudflare después de migrar)
+# https://ameec.net/*  https://ameec.org/:splat  301
+
+# Alias corto para el form de inscripción
+/inscribete  /#inscribete  302
+
+# 404 fallback (Astro ya genera 404.html, esto es por si Cloudflare lo necesita explícito)
+/*  /404  404

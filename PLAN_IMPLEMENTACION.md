@@ -1,7 +1,7 @@
 # Plan de Implementación — Ecosistema Digital AMEEC
 
 > Documento de traspaso para continuación por otra IA o equipo técnico.
-> Estado: **Fase 2 iniciada** — sitio de inducción en desarrollo activo.
+> Estado: **Fase 2 completada** — sitio construye sin errores, listo para deploy.
 > Fecha: Mayo 2026
 
 ---
@@ -33,12 +33,12 @@
 | ----------- | --------------------------------------------------------------------- | ------------------------------------------- |
 | Framework   | **Astro 5**                                                           | SSG, rendimiento, componentes .astro        |
 | Estilos     | **Tailwind CSS 3**                                                    | Utilidades, sistema de diseño propio        |
-| CMS         | **Decap CMS** (pendiente de integrar)                                 | Git-based, interfaz visual para no-técnicos |
+| CMS         | **Decap CMS** ✅ integrado (`public/admin/`)                           | Git-based, interfaz visual para no-técnicos |
 | Hosting     | **Cloudflare Pages** (pendiente de configurar)                        | Free tier, CDN global, sin lock-in          |
-| Formularios | **Formspree**                                                         | Simple, sin backend propio                  |
-| Analítica   | **Plausible** (pendiente)                                             | Privacy-first, sin cookies                  |
+| Formularios | **Formspree** ✅ integrado (requiere `PUBLIC_FORMSPREE_ID` en .env)    | Simple, sin backend propio                  |
+| Analítica   | **Plausible** (pendiente — agregar script en Layout.astro)            | Privacy-first, sin cookies                  |
 | Fuentes     | Fraunces (display) + Inter (cuerpo) — Google Fonts                    |
-| IA          | **Claude API** vía Cloudflare Worker — chatbot de inducción (Fase 2B) |
+| IA          | **Claude API** ✅ Worker en `workers/chatbot.ts` + UI `Chatbot.astro`  |
 
 **Paleta de color (tokens ya configurados en `tailwind.config.js`):**
 
@@ -52,6 +52,8 @@
 ## Estado actual del código
 
 ### Repositorio: `/Users/arnoldomarcelo/marcelo_sias/ameec`
+
+**`npm run build` pasa sin errores. `npm run dev` levanta en `localhost:4321`.**
 
 **Archivos ya creados — NO recrear:**
 
@@ -137,23 +139,31 @@ npm run dev   # levanta en localhost:4321
   - El Layout ya la referencia y el archivo existe.
   - Regenerada con foto real de bioconstrucción como fondo.
 
-#### 2B — Chatbot de inducción con Claude (estimado: 4-6 horas, requiere Claude API key)
+#### 2B — Chatbot de inducción con Claude ✅ código completo (falta deploy)
 
 - [ ] **Preparar base de conocimiento:**
   - Recopilar documentos PDF o texto con: reglamento interno, preguntas frecuentes, calendario de sesiones, descripción de proyectos.
-  - Guardar en `src/content/kb/` como archivos `.md`.
+  - Guardar en `src/content/kb/` como archivos `.md` y referenciarlos desde el `SYSTEM_PROMPT` en `workers/chatbot.ts`.
 
-- [ ] **Cloudflare Worker con Claude API:**
-  - Crear worker en `workers/chatbot.ts`.
-  - Usar `claude-haiku-4-5-20251001` (costo bajo, respuesta rápida).
-  - Implementar prompt de sistema con contexto AMEEC + instrucción de redirigir a `hola@ameec.org` si no sabe.
-  - Activar prompt caching para los documentos base (reducir costo ~90%).
+- [x] **Cloudflare Worker con Claude API:** `workers/chatbot.ts`
+  - Usa `claude-haiku-4-5-20251001` (costo bajo, ~$0.001/conversación).
+  - Prompt de sistema con contexto AMEEC + instrucción de redirigir a `hola@ameec.org`.
+  - Prompt caching activado (`anthropic-beta: prompt-caching-2024-07-31`) — reduce costo ~90%.
+  - CORS configurado para `induccion.ameec.org`.
+  - `workers/wrangler.toml` listo para `wrangler deploy`.
 
-- [ ] **Componente de chat en el frontend:**
-  - Crear `src/components/Chatbot.astro` con interfaz flotante (botón esquina inferior derecha).
-  - Llamar al worker via `fetch` desde el cliente.
-  - Incluir indicador de carga y manejo de errores.
-  - Añadir al `Layout.astro` para que aparezca en todas las páginas del sitio.
+- [x] **Componente de chat en el frontend:** `src/components/Chatbot.astro`
+  - Widget flotante bottom-right, historial de conversación, indicador de typing animado.
+  - En dev apunta a `localhost:8787`; en prod a `/api/chat`.
+  - Integrado en `Layout.astro` — aparece en todas las páginas.
+
+- [ ] **Deploy del worker** (único paso pendiente):
+  ```bash
+  npm install -g wrangler
+  wrangler login
+  wrangler secret put CLAUDE_API_KEY   # pegar la clave de console.anthropic.com
+  wrangler deploy                       # desde la raíz del proyecto
+  ```
 
 #### 2C — Integrar Decap CMS (estimado: 2-3 horas)
 
@@ -179,16 +189,27 @@ npm run dev   # levanta en localhost:4321
   - Opción A (recomendada): Git Gateway con Netlify Identity.
   - Opción B: Cloudflare Access + GitHub OAuth.
 
-#### 2D — Deploy en Cloudflare Pages (estimado: 1 hora)
+#### 2D — Deploy en Cloudflare Pages — ÚNICO PASO REAL PENDIENTE
 
-- [ ] Crear cuenta/proyecto en Cloudflare Pages.
-- [ ] Conectar repositorio Git (GitHub/GitLab).
-- [ ] Configurar build:
-  - Build command: `npm run build`
-  - Output directory: `dist`
-  - Node version: `20`
-- [ ] Configurar dominio `induccion.ameec.org` → agregar registro CNAME en DNS de ameec.org.
-- [ ] Configurar variables de entorno: `CLAUDE_API_KEY` (para el worker del chatbot).
+El código compila (`npm run build` ✅). Solo falta publicarlo.
+
+- [ ] Subir repo a GitHub/GitLab (si no está ya).
+- [ ] dash.cloudflare.com → **Workers & Pages** → **Create** → **Pages** → **Connect to Git**.
+- [ ] Configurar build en Cloudflare:
+  - **Build command:** `npm run build`
+  - **Output directory:** `dist`
+  - **Node.js version:** `20`
+- [ ] Variables de entorno en el dashboard de Cloudflare Pages (Settings → Environment variables):
+  - `PUBLIC_FORMSPREE_ID` = ID del form en formspree.io
+- [ ] Configurar dominio personalizado: `induccion.ameec.org` → agregar CNAME en DNS de ameec.org apuntando a `<proyecto>.pages.dev`.
+- [ ] Deploy del Worker del chatbot (separado del sitio estático):
+  ```bash
+  npm install -g wrangler
+  wrangler login
+  wrangler secret put CLAUDE_API_KEY
+  wrangler deploy
+  ```
+- [ ] Verificar que `https://induccion.ameec.org` carga, el formulario envía y el chat responde.
 
 ---
 
@@ -238,7 +259,7 @@ Ordenadas por prioridad y facilidad de implementación:
 
 | #   | Automatización                                      | Herramienta                    | Esfuerzo | Estado                 |
 | --- | --------------------------------------------------- | ------------------------------ | -------- | ---------------------- |
-| 1   | **Chatbot de inducción** (responde FAQs 24/7)       | Claude API + Cloudflare Worker | Medio    | Pendiente (Fase 2B)    |
+| 1   | **Chatbot de inducción** (responde FAQs 24/7)       | Claude API + Cloudflare Worker | Medio    | ✅ Código listo, falta `wrangler deploy` |
 | 2   | **Alt-text automático** al subir imágenes a Decap   | Claude Vision API              | Bajo     | Pendiente (post Decap) |
 | 3   | **Generación de meta-tags SEO** al publicar         | Claude API + Decap hook        | Bajo     | Pendiente              |
 | 4   | **Newsletter mensual auto-borrador**                | n8n + Claude API               | Bajo     | Pendiente (Fase 3)     |

@@ -1,0 +1,196 @@
+---
+// Chatbot de inducción AMEEC — conecta con workers/chatbot.ts
+// En producción el endpoint apunta a https://induccion.ameec.org/api/chat
+const endpoint = import.meta.env.DEV
+  ? 'http://localhost:8787'
+  : '/api/chat';
+---
+
+<div id="chatbot-root" class="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
+  <!-- Ventana de chat -->
+  <div
+    id="chat-window"
+    class="hidden w-[clamp(300px,90vw,380px)] flex-col overflow-hidden rounded-3xl border border-carbon/10 bg-white shadow-2xl"
+    aria-live="polite"
+    aria-label="Chat de inducción AMEEC"
+  >
+    <header class="flex items-center justify-between bg-verde-500 px-5 py-4">
+      <div class="flex items-center gap-3">
+        <span class="relative flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-ocre-400 font-display font-bold text-white text-sm">
+          A
+          <span class="absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full border-2 border-verde-500 bg-green-400"></span>
+        </span>
+        <div>
+          <p class="text-sm font-semibold text-white leading-tight">Asistente AMEEC</p>
+          <p class="text-xs text-white/70">Responde en segundos</p>
+        </div>
+      </div>
+      <button
+        id="chat-close"
+        class="flex h-8 w-8 items-center justify-center rounded-full text-white/70 hover:bg-white/10 hover:text-white transition-colors"
+        aria-label="Cerrar chat"
+      >
+        <svg viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4" aria-hidden="true">
+          <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
+        </svg>
+      </button>
+    </header>
+
+    <div id="chat-messages" class="flex flex-col gap-3 overflow-y-auto p-4" style="height: 300px; max-height: 50vh;">
+      <div class="flex gap-2">
+        <span class="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-ocre-400 font-display text-xs font-bold text-white">A</span>
+        <p class="rounded-2xl rounded-tl-sm bg-crema px-4 py-3 text-sm leading-relaxed text-carbon">
+          Hola, soy el asistente de AMEEC. Puedo ayudarte con preguntas sobre el proceso de inducción, proyectos y formas de participar. ¿En qué te puedo orientar?
+        </p>
+      </div>
+    </div>
+
+    <form id="chat-form" class="border-t border-carbon/10 p-3">
+      <div class="flex gap-2">
+        <input
+          id="chat-input"
+          type="text"
+          placeholder="Escribe tu pregunta..."
+          maxlength="500"
+          class="min-w-0 flex-1 rounded-full border border-carbon/15 px-4 py-2.5 text-sm text-carbon placeholder-carbon/40 focus:border-ocre-400 focus:outline-none focus:ring-0"
+          autocomplete="off"
+        />
+        <button
+          type="submit"
+          id="chat-send"
+          class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-verde-500 text-white transition-colors hover:bg-ocre-400 disabled:opacity-50"
+          aria-label="Enviar mensaje"
+        >
+          <svg viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4" aria-hidden="true">
+            <path d="M3.105 2.289a.75.75 0 00-.826.95l1.903 6.557H13.5a.75.75 0 010 1.5H4.182l-1.903 6.557a.75.75 0 00.826.95 28.896 28.896 0 0015.293-7.154.75.75 0 000-1.115A28.897 28.897 0 003.105 2.289z" />
+          </svg>
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Botón flotante -->
+  <button
+    id="chat-toggle"
+    class="flex h-14 w-14 items-center justify-center rounded-full bg-verde-500 text-white shadow-lg transition-all duration-200 hover:bg-ocre-400 hover:scale-110"
+    aria-label="Abrir asistente de inducción"
+    aria-expanded="false"
+    aria-controls="chat-window"
+  >
+    <svg id="chat-icon-open" viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6" aria-hidden="true">
+      <path fill-rule="evenodd" d="M4.848 2.771A49.144 49.144 0 0112 2.25c2.43 0 4.817.178 7.152.52 1.978.292 3.348 2.024 3.348 3.97v6.02c0 1.946-1.37 3.678-3.348 3.97a48.901 48.901 0 01-3.476.383.39.39 0 00-.297.17l-2.755 4.133a.75.75 0 01-1.248 0l-2.755-4.133a.39.39 0 00-.297-.17 48.9 48.9 0 01-3.476-.384c-1.978-.29-3.348-2.024-3.348-3.97V6.741c0-1.946 1.37-3.68 3.348-3.97z" clip-rule="evenodd" />
+    </svg>
+    <svg id="chat-icon-close" viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6 hidden" aria-hidden="true">
+      <path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clip-rule="evenodd" />
+    </svg>
+  </button>
+</div>
+
+<script define:vars={{ endpoint }}>
+  const toggle = document.getElementById('chat-toggle');
+  const closeBtn = document.getElementById('chat-close');
+  const window_ = document.getElementById('chat-window');
+  const form = document.getElementById('chat-form');
+  const input = document.getElementById('chat-input');
+  const sendBtn = document.getElementById('chat-send');
+  const messagesEl = document.getElementById('chat-messages');
+  const iconOpen = document.getElementById('chat-icon-open');
+  const iconClose = document.getElementById('chat-icon-close');
+
+  let isOpen = false;
+  const history = [];
+
+  function openChat() {
+    isOpen = true;
+    window_.classList.remove('hidden');
+    window_.classList.add('flex');
+    toggle.setAttribute('aria-expanded', 'true');
+    iconOpen.classList.add('hidden');
+    iconClose.classList.remove('hidden');
+    input.focus();
+  }
+
+  function closeChat() {
+    isOpen = false;
+    window_.classList.add('hidden');
+    window_.classList.remove('flex');
+    toggle.setAttribute('aria-expanded', 'false');
+    iconOpen.classList.remove('hidden');
+    iconClose.classList.add('hidden');
+  }
+
+  toggle.addEventListener('click', () => isOpen ? closeChat() : openChat());
+  closeBtn.addEventListener('click', closeChat);
+
+  function appendMessage(role, text) {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'flex gap-2' + (role === 'user' ? ' flex-row-reverse' : '');
+
+    const avatar = document.createElement('span');
+    avatar.className = role === 'user'
+      ? 'mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-carbon/15 text-xs font-bold text-carbon'
+      : 'mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-ocre-400 font-display text-xs font-bold text-white';
+    avatar.textContent = role === 'user' ? 'Tú' : 'A';
+
+    const bubble = document.createElement('p');
+    bubble.className = role === 'user'
+      ? 'rounded-2xl rounded-tr-sm bg-verde-500 px-4 py-3 text-sm leading-relaxed text-white'
+      : 'rounded-2xl rounded-tl-sm bg-crema px-4 py-3 text-sm leading-relaxed text-carbon';
+    bubble.textContent = text;
+
+    wrapper.appendChild(avatar);
+    wrapper.appendChild(bubble);
+    messagesEl.appendChild(wrapper);
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+  }
+
+  function showTyping() {
+    const el = document.createElement('div');
+    el.id = 'typing-indicator';
+    el.className = 'flex gap-2';
+    el.innerHTML = `
+      <span class="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-ocre-400 font-display text-xs font-bold text-white">A</span>
+      <div class="flex items-center gap-1 rounded-2xl rounded-tl-sm bg-crema px-4 py-3">
+        <span class="h-2 w-2 animate-bounce rounded-full bg-carbon/40 [animation-delay:0ms]"></span>
+        <span class="h-2 w-2 animate-bounce rounded-full bg-carbon/40 [animation-delay:150ms]"></span>
+        <span class="h-2 w-2 animate-bounce rounded-full bg-carbon/40 [animation-delay:300ms]"></span>
+      </div>`;
+    messagesEl.appendChild(el);
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+    return el;
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const text = input.value.trim();
+    if (!text) return;
+
+    input.value = '';
+    sendBtn.disabled = true;
+    appendMessage('user', text);
+    history.push({ role: 'user', content: text });
+
+    const typing = showTyping();
+
+    try {
+      const res = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: history }),
+      });
+
+      const data = await res.json();
+      typing.remove();
+
+      const reply = data.reply || 'Ocurrió un error. Escríbenos a hola@ameec.org.';
+      appendMessage('assistant', reply);
+      history.push({ role: 'assistant', content: reply });
+    } catch {
+      typing.remove();
+      appendMessage('assistant', 'No pude conectarme. Intenta de nuevo o escríbenos a hola@ameec.org.');
+    } finally {
+      sendBtn.disabled = false;
+      input.focus();
+    }
+  });
+</script>
