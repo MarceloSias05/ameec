@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import general from '../content/config/general.json';
-import heroWorkshop from '../assets/hero-workshop.svg';
+import heroPhoto from '../assets/ameec-bioconstruccion.jpg';
 
 const { hero } = general;
 ---
@@ -27,7 +27,7 @@ const { hero } = general;
   <div class="relative">
     <div class="relative aspect-square overflow-hidden rounded-3xl bg-verde-500 shadow-lg">
       <Image
-        src={heroWorkshop}
+        src={heroPhoto}
         alt={hero.image_alt}
         class="h-full w-full object-cover"
         loading="eager"

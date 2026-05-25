@@ -102,14 +102,13 @@ npm run dev   # levanta en localhost:4321
 - [x] **Instalar dependencias** (`npm install`) y verificar que `npm run dev` levanta sin errores.
   - Verificado localmente: `node_modules/` existe, `npm run build` pasa y `npm run dev -- --host 127.0.0.1` levanta en `http://127.0.0.1:4321/`.
 
-- [ ] **Hero con imagen real:**
-  - El componente `Hero.astro` tiene un placeholder de gradiente verde.
-  - Reemplazar con una imagen real del equipo AMEEC o de un taller.
-  - Usar `<Image>` de `astro:assets` para optimización automática.
-  - Guardar imagen en `public/images/hero.jpg` (o `src/assets/` si se usa optimización).
+- [x] **Hero con imagen real:**
+  - `Hero.astro` usa una foto real del sitio actual: `src/assets/ameec-bioconstruccion.jpg`.
+  - Usa `<Image>` de `astro:assets` para optimización automática.
+  - Se agregaron fotos reales complementarias en `src/assets/ameec-comunidad.jpg` y `src/assets/ameec-olas.jpg`.
+  - Las imágenes fueron reescritas sin metadatos EXIF/GPS antes de quedar en el repo.
   - El texto actual del hero: _"Llegué buscando un curso. Encontré una comunidad."_ — confirmar con AMEEC si es testimonio real o placeholder.
-  - Implementación técnica lista: `Hero.astro` ya usa `<Image>` con `src/assets/hero-workshop.svg`.
-  - Pendiente real antes de publicar: sustituir la ilustración por una foto real y confirmar el testimonio.
+  - Pendiente real antes de publicar: confirmar el testimonio.
 
 - [ ] **Configurar Formspree:**
   - Crear cuenta en formspree.io con el correo `hola@ameec.org`.
@@ -135,7 +134,8 @@ npm run dev   # levanta en localhost:4321
 
 - [x] **OG Image:**
   - Crear `public/og-image.jpg` (1200×630px) con la identidad visual AMEEC.
-  - El Layout ya la referencia pero el archivo no existe.
+  - El Layout ya la referencia y el archivo existe.
+  - Regenerada con foto real de bioconstrucción como fondo.
 
 #### 2B — Chatbot de inducción con Claude (estimado: 4-6 horas, requiere Claude API key)
 
@@ -159,20 +159,21 @@ npm run dev   # levanta en localhost:4321
 
 - [ ] **Instalar `@astrojs/netlify` o configurar para Cloudflare Pages.**
 
-- [ ] **Crear `public/admin/index.html`** con el script de Decap CMS:
+- [x] **Crear `public/admin/index.html`** con el script de Decap CMS:
 
   ```html
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
   ```
 
-- [ ] **Crear `public/admin/config.yml`** definiendo colecciones editables:
+- [x] **Crear `public/admin/config.yml`** definiendo colecciones editables:
   - `testimonios` — editar los 3 testimonios en `Stories.astro`.
   - `pasos` — editar los 4 pasos de `ProcessSteps.astro`.
   - `faq` — editar preguntas/respuestas de `FAQ.astro`.
   - `config_general` — logo, correo de contacto, texto del hero.
 
-- [ ] **Refactorizar componentes para leer de archivos `.md`/`.json`** en vez de datos hardcodeados.
+- [x] **Refactorizar componentes para leer de archivos `.md`/`.json`** en vez de datos hardcodeados.
   - Usar `Astro.glob()` o Content Collections de Astro.
+  - Implementado con JSON editables en `src/content/config/` y `src/content/induccion/`.
 
 - [ ] **Configurar autenticación de Decap:**
   - Opción A (recomendada): Git Gateway con Netlify Identity.
